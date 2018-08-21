@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="shape_radius">10dp</dimen>
+    <dimen name="margin_layout_button">10dp</dimen>
+    <dimen name="hight_header">60dp</dimen>
+    <dimen name="tvRegis_margin_buttom">16dp</dimen>
+    <dimen name="editText_width">300dp</dimen>
+    <dimen name="mess_margin_right">15dp</dimen>
+    <dimen name="mess_box_padding">15dp</dimen>
+    <dimen name="hello_mess_margin_topbutt">20dp</dimen>
+    <dimen name="margin_message">10dp</dimen>
+    <dimen name="register_margin">10dp</dimen>
+    <dimen name="magin_inside_register">5dp</dimen>
+    <dimen name="padding_inside_register">5dp</dimen>
+    <dimen name="drawer_menu_width">240dp</dimen>
+</resources>

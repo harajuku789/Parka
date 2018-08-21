@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">IPLDS</string>
+    <string name="open_drawer">Open menu</string>
+    <string name="cloes_drawer">Cloes menu</string>
+    <string name="mess_end_time">26/08/2018 8:09 pm</string>
+    <string name="mess_start_time">26/08/2018 12:15 pm</string>
+    <string name="position_message">Position: 2</string>
+    <string name="zone_message">Zone: Pink</string>
+    <string name="floor_message">Floor: 10B</string>
+    <string name="building_message">Building: 14 Floor Building</string>
+    <string name="hello_tvName">Ananya</string>
+    <string name="hello_tvSurname">Bantad</string>
+    <string name="tvHello">Hello</string>
+    <string name="tvRegister_name">Name</string>
+    <string name="tvRegister_surname">Surname</string>
+    <string name="tvRegister_telNumber">Tel-number</string>
+    <string name="tvRegister_email">E-mail</string>
+    <string name="tvRegister_userName">Username</string>
+    <string name="tvRegister_password">Password</string>
+    <string name="tvRegister_rePassword">Re-password</string>
+    <string name="btn_submit_register">SUBMIT</string>
+    <string name="content_between_dateTime">-</string>
+    <string name="text_logout">Logout</string>
+</resources>
