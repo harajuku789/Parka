@@ -31,6 +31,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     ActionBarDrawerToggle actionBarDrawerToggle;
     Toolbar toolbar;
     Button btnLogout;
+    Button btnHelp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +46,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
         //----- drawer manu -----
         drawerLayout = (DrawerLayout)findViewById(R.id.drawerLayout);
         actionBarDrawerToggle = new ActionBarDrawerToggle(
@@ -57,10 +59,20 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        // hide title
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        // show applogo
+        //getSupportActionBar().setLogo(R.drawable.app_logo_parka);
+
+
 
         //----- Button Logout
         btnLogout = (Button)findViewById(R.id.btnLogout);
         btnLogout.setOnClickListener(this);
+
+        //----- Button Help Information
+        btnHelp = (Button)findViewById(R.id.btnHelp);
+        btnHelp.setOnClickListener(this);
 
     }
 
@@ -87,6 +99,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         if (view == btnLogout){
             startActivity(new Intent(HomeActivity.this, MainActivity.class ));
+        }
+
+        if (view == btnHelp){
+            startActivity(new Intent(HomeActivity.this, HelpActivity.class));
         }
     }
 }

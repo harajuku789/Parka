@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">IPLDS</string>
+    <string name="app_name">Parka</string>
     <string name="open_drawer">Open menu</string>
     <string name="cloes_drawer">Cloes menu</string>
     <string name="mess_end_time">26/08/2018 8:09 pm</string>
@@ -21,4 +21,8 @@
     <string name="btn_submit_register">SUBMIT</string>
     <string name="content_between_dateTime">-</string>
     <string name="text_logout">Logout</string>
+    <string name="please_input_info">*</string>
+    <string name="text_help">Help</string>
+    <string name="tv_help_1st">1. Open Bluetooth for use Parka.</string>
+    <string name="tv_help_2nd">2. The best location of your smart phone is on the console.</string>
 </resources>

@@ -13,7 +13,7 @@
     </style>
 
     <style name="header_font_size">
-        <item name="android:textColor">@color/font_color</item>
+        <item name="android:textColor">@color/colorAccent</item>
         <item name="android:textSize">23sp</item>
     </style>
 

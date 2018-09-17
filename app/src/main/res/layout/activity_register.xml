@@ -16,16 +16,18 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <include layout="@layout/toolbar_back" />
+            <include layout="@layout/toolbar_backpage" />
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginBottom="@dimen/first_margin_buttom">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/register_margin"
+                    android:layout_margin="@dimen/first_layout_margin"
                     android:background="@drawable/bg_radius_white"
                     android:gravity="center_horizontal"
                     android:orientation="vertical">
@@ -33,7 +35,8 @@
                     <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/hight_header"
-                        android:background="@drawable/register_header_radius">
+                        android:background="@drawable/header_radius"
+                        android:layout_marginTop="@dimen/second_layout_margin">
 
                         <TextView
                             style="@style/header_font_size"
@@ -44,13 +47,13 @@
 
                     </FrameLayout>
 
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/magin_inside_register"
                         android:orientation="vertical"
-                        android:padding="@dimen/padding_inside_register">
+                        android:layout_margin="@dimen/second_layout_margin"
+                        android:padding="@dimen/padding_seclayout_inside"
+                        android:paddingBottom="@dimen/padding_buttom_inside">
 
                         <TextView
                             style="@style/header_font_size_title"
@@ -62,7 +65,8 @@
                             android:id="@+id/etName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="text" />
+                            android:inputType="text"
+                            />
 
                         <TextView
                             style="@style/header_font_size_title"
@@ -138,19 +142,17 @@
 
                     </LinearLayout>
 
-
-                    <Button
-                        android:id="@+id/btnRegisSubmit"
-                        style="@style/header_font_size_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/margin_layout_button"
-                        android:text="@string/btn_submit_register" />
-
                 </LinearLayout>
 
+                <Button
+                    android:id="@+id/btnRegisSubmit"
+                    style="@style/header_font_size_title"
+                    android:layout_width="@dimen/editText_width"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/btn_submit_register" />
 
-            </RelativeLayout>
+            </LinearLayout>
 
         </LinearLayout>
 

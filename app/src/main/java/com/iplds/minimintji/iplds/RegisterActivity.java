@@ -41,7 +41,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        getSupportActionBar().setTitle("Register");
+        getSupportActionBar().setTitle("Back");
 
         //------ Submit Button -----
         btnRegisSummit = (Button) findViewById(R.id.btnRegisSubmit);
