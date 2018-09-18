@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/drawerLayout_register"
-    tools:context=".RegisterActivity">
+    tools:context=".activity.RegisterActivity">
 
     <ScrollView
         android:layout_width="match_parent"

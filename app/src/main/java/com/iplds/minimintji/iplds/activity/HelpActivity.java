@@ -1,10 +1,12 @@
-package com.iplds.minimintji.iplds;
+package com.iplds.minimintji.iplds.activity;
 
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+
+import com.iplds.minimintji.iplds.R;
 
 public class HelpActivity extends AppCompatActivity {
     Toolbar toolbar;
