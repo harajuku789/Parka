@@ -112,6 +112,7 @@
                             android:text="@string/tvRegister_userName" />
 
                         <EditText
+                            android:id="@+id/etUserName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="text" />
@@ -123,22 +124,11 @@
                             android:text="@string/tvRegister_password" />
 
                         <EditText
-                            android:id="@+id/etRePass"
+                            android:id="@+id/etPassword"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="textPassword" />
 
-                        <TextView
-                            style="@style/header_font_size_title"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/tvRegister_rePassword" />
-
-                        <EditText
-                            android:id="@+id/etpassword"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="textPassword" />
 
                     </LinearLayout>
 

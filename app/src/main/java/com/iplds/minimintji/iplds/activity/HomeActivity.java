@@ -34,7 +34,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     Toolbar toolbar;
     Button btnLogout;
     Button btnHelp;
-    TextView tvName, tvSurname;
+    TextView tvName, tvSurname, tvNameHeader, tvSurnameHeader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +50,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         //----- TextView -----
         tvName = (TextView) findViewById(R.id.tvName);
         tvSurname = (TextView) findViewById(R.id.tvSurname);
+        tvNameHeader = (TextView) findViewById(R.id.tvNameHeader);
+        tvSurnameHeader = (TextView) findViewById(R.id.tvSurnameHeader);
 
         //----- Toolbar -----
         toolbar = (Toolbar)findViewById(R.id.toolbar);
@@ -86,6 +88,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         String userToken = prefs.getString("UserToken",null);
         Log.d("TOken","User TOken is :"+userToken);
 
+        getUserInfo(userToken);
+    }
+
+    private void getUserInfo(String userToken) {
         Call<User> call = HttpManager.getInstance()
                 .getService()
                 .getUserInfo(userToken);
@@ -97,6 +103,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 if (response.isSuccessful() && userInfo != null){
                     tvName.setText(userInfo.getName());
                     tvSurname.setText(userInfo.getSurname());
+
+                    tvNameHeader.setText(userInfo.getName());
+                    tvSurnameHeader.setText(userInfo.getSurname());
                 }
             }
 
@@ -106,7 +115,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
     }
-
 
 
     @Override
@@ -131,7 +139,30 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         if (view == btnLogout){
-            startActivity(new Intent(HomeActivity.this, MainActivity.class ));
+//            final SharedPreferences prefs = getBaseContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+//            String userToken = prefs.getString("UserToken",null);
+//            Log.d("token","*********** User Token :"+userToken);
+//
+//            Call call = HttpManager.getInstance()
+//                    .getService()
+//                    .logout(userToken);
+//            call.enqueue(new Callback<User>() {
+//                @Override
+//                public void onResponse(Call<User> call, Response<User> response) {
+//                    User resBody = response.body();
+//                    if (response.isSuccessful() && resBody == null){
+//                        Intent intent = new Intent(HomeActivity.this, MainActivity.class);
+//                        startActivity(intent);
+//                    }
+//                }
+//
+//                @Override
+//                public void onFailure(Call<User> call, Throwable t) {
+//                    Toast.makeText(HomeActivity.this, "Error: "+String.valueOf(t.getMessage()),Toast.LENGTH_LONG).show();
+//                }
+//            });
+            Intent intent = new Intent(HomeActivity.this, MainActivity.class);
+            startActivity(intent);
         }
 
         if (view == btnHelp){

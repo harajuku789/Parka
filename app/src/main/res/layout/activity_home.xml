@@ -82,7 +82,42 @@
         android:background="#FFFFFF"
         android:orientation="vertical">
 
-        <include layout="@layout/navigation_header"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:background="@color/colorPrimary">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="80dp"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <TextView
+                    style="@style/header_font_size_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/mess_margin_right"
+                    android:text="@string/tvHello" />
+
+                <TextView
+                    android:id="@+id/tvNameHeader"
+                    style="@style/header_font_size_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/mess_margin_right"
+                    android:text="@string/hello_tvName" />
+
+                <TextView
+                    android:id="@+id/tvSurnameHeader"
+                    style="@style/header_font_size_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/mess_margin_right"
+                    android:text="@string/hello_tvSurname" />
+            </LinearLayout>
+        </LinearLayout>
 
         <Button
             android:id="@+id/btnHelp"
