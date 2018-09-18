@@ -1,8 +1,11 @@
 package com.iplds.minimintji.iplds.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -58,6 +61,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         Intent intent = new Intent(MainActivity.this, HomeActivity.class);
                         startActivity(intent);
                         Toast.makeText(MainActivity.this, "Token: " + responseToken.getToken(), Toast.LENGTH_LONG).show();
+
+                        SharedPreferences prefs = getBaseContext().getSharedPreferences("userInfo",
+                                Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = prefs.edit();
+                        // add/edit/delete
+                        editor.putString("UserToken", responseToken.getToken());
+                        editor.apply(); //flush file
+
+//                        String value = prefs.getString("Hello", null);
+//                        Log.d("--- Hello sheardPref :",value);
                     } else {
                         Toast.makeText(MainActivity.this, "Response: " + String.valueOf(response.code()), Toast.LENGTH_LONG).show();
                     }
