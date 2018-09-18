@@ -36,7 +36,7 @@ public class HttpManager {
         service = retrofit.create(ApiService.class);
     }
 
-    public static ApiService getService() {
-         return  service;
+    public ApiService getService(){
+        return service;
     }
 }
