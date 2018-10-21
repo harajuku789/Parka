@@ -25,4 +25,9 @@
     <string name="text_help">Help</string>
     <string name="tv_help_1st">1. Open Bluetooth for use Parka.</string>
     <string name="tv_help_2nd">2. The best location of your smart phone is on the console.</string>
+    <string name="hint_username">Username</string>
+    <string name="hint_password">Password</string>
+    <string name="btn_text_register">Register</string>
+    <string name="btn_text_login">Login</string>
+    <string name="text_re_password">Re-Password</string>
 </resources>

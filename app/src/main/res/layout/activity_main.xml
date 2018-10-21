@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:inputType="text"
-            android:hint="Username" />
+            android:hint="@string/hint_username" />
 
         <EditText
             android:id="@+id/etPassword"
@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:inputType="textPassword"
-            android:hint="Password"/>
+            android:hint="@string/hint_password"/>
 
     </LinearLayout>
 
@@ -51,7 +51,10 @@
         android:layout_width="@dimen/editText_width"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/btn_margin_top"
-        android:text="Login" />
+        android:text="@string/btn_text_login"
+        android:enabled="false"
+        android:onClick="Login"
+        tools:ignore="OnClick" />
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -59,14 +62,14 @@
         android:layout_weight="1">
 
         <Button
-            android:id="@+id/btnRegister"
-            style="@style/header_font_size_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center_horizontal"
             android:layout_marginBottom="@dimen/tvRegis_margin_buttom"
             android:background="@color/alpha_color"
-            android:text="Register" />
+            android:text="@string/btn_text_register"
+            android:onClick="Register"
+            tools:ignore="OnClick" />
     </FrameLayout>
 
 

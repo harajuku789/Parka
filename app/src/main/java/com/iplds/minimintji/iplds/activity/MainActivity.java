@@ -5,10 +5,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextSwitcher;
 import android.widget.Toast;
 
 import com.iplds.minimintji.iplds.R;
@@ -19,8 +22,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
-    Button btnLogin, btnRegister, btnRegisSubmit;
+public class MainActivity extends AppCompatActivity {
+    Button btnLogin;
     EditText etUserName, etPassword;
 
     @Override
@@ -33,65 +36,81 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initInstances() {
-        btnLogin =  (Button)findViewById(R.id.btnLogin);
-        btnLogin.setOnClickListener(this);
+        etUserName = (EditText) findViewById(R.id.etUserName);
+        etPassword = (EditText) findViewById(R.id.etPassword);
 
-        etUserName = (EditText)findViewById(R.id.etUserName);
-        etPassword = (EditText)findViewById(R.id.etPassword);
+        btnLogin = (Button)findViewById(R.id.btnLogin);
 
-        btnRegister = (Button)findViewById(R.id.btnRegister);
-        btnRegister.setOnClickListener(this);
+        etUserName.addTextChangedListener(LoginTextWatcher);
+        etPassword.addTextChangedListener(LoginTextWatcher);
 
     }
 
 
-    @Override
-    public void onClick(View view) {
+    public void Login(View view) {
+        // use it when click Loin button at Login page
+        Call<Token> call = HttpManager.getInstance()
+                .getService()
+                .login(etUserName.getText().toString(),
+                        etPassword.getText().toString());
+        call.enqueue(new Callback<Token>() {
+            @Override
+            public void onResponse(Call<Token> call, Response<Token> response) {
+                Token responseToken = response.body();
+                if (response.isSuccessful() && responseToken != null) {
+                    Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                    startActivity(intent);
+                    Toast.makeText(MainActivity.this, "Token: " + responseToken.getToken(), Toast.LENGTH_LONG).show();
 
-        if (view == btnLogin){
-            Call<Token> call = HttpManager.getInstance()
-                    .getService()
-                    .login(etUserName.getText().toString(),
-                            etPassword.getText().toString());
-            call.enqueue(new Callback<Token>() {
-                @Override
-                public void onResponse(Call<Token> call, Response<Token> response) {
-                    Token responseToken = response.body();
-                    if (response.isSuccessful() && responseToken != null){
-                        Intent intent = new Intent(MainActivity.this, HomeActivity.class);
-                        startActivity(intent);
-                        Toast.makeText(MainActivity.this, "Token: " + responseToken.getToken(), Toast.LENGTH_LONG).show();
-
-                        SharedPreferences prefs = getBaseContext().getSharedPreferences("userInfo",
-                                Context.MODE_PRIVATE);
-                        SharedPreferences.Editor editor = prefs.edit();
-                        // add/edit/delete
-                        editor.putString("UserToken", responseToken.getToken());
-                        editor.apply(); //flush file
+                    SharedPreferences prefs = getBaseContext().getSharedPreferences("userInfo",
+                            Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = prefs.edit();
+                    // add/edit/delete
+                    editor.putString("UserToken", responseToken.getToken());
+                    editor.apply(); //flush file
 
 //                        String value = prefs.getString("Hello", null);
 //                        Log.d("--- Hello sheardPref :",value);
-                    } else {
-                        Toast.makeText(MainActivity.this, "Response: " + String.valueOf(response.code()), Toast.LENGTH_LONG).show();
-                    }
+                } else {
+                    Toast.makeText(MainActivity.this, "Response: " + String.valueOf(response.code()), Toast.LENGTH_LONG).show();
                 }
+            }
 
-                @Override
-                public void onFailure(Call<Token> call, Throwable t) {
-                    Toast.makeText(MainActivity.this, "Error: "+String.valueOf(t.getMessage()),Toast.LENGTH_LONG).show();
-                }
-            });
-//            startActivity(new Intent(MainActivity.this, HomeActivity.class));
-            // finish();
-
-        }
-
-        if (view == btnRegister){
-            startActivity(new Intent(MainActivity.this, RegisterActivity.class));
-
-        }
+            @Override
+            public void onFailure(Call<Token> call, Throwable t) {
+                Toast.makeText(MainActivity.this, "Error: " + String.valueOf(t.getMessage()), Toast.LENGTH_LONG).show();
+            }
+        });
 
     }
+
+    public void Register(View view) {
+        // use it when click Register button below Login button at Login page
+        startActivity(new Intent(MainActivity.this, RegisterActivity.class));
+    }
+
+
+    private TextWatcher LoginTextWatcher = new TextWatcher() {
+        // Check Edittext is empty or not with username n password
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            String userNameInput = etUserName.getText().toString().trim();
+            String passwordInput = etPassword.getText().toString().trim();
+
+            btnLogin.setEnabled(!userNameInput.isEmpty() && !passwordInput.isEmpty());
+            // if true, login buttom can be click
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+
+        }
+    };
 
 
 }

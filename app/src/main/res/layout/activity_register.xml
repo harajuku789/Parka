@@ -61,12 +61,18 @@
                             android:layout_height="wrap_content"
                             android:text="@string/tvRegister_name" />
 
-                        <EditText
-                            android:id="@+id/etName"
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/etInputName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="text"
-                            />
+                            app:errorEnabled="true">
+
+                            <android.support.design.widget.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="text"/>
+
+                        </android.support.design.widget.TextInputLayout>
 
                         <TextView
                             style="@style/header_font_size_title"
@@ -74,11 +80,18 @@
                             android:layout_height="wrap_content"
                             android:text="@string/tvRegister_surname" />
 
-                        <EditText
-                            android:id="@+id/etSurname"
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/etInputSurname"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="text" />
+                            app:errorEnabled="true">
+
+                            <android.support.design.widget.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="text"/>
+
+                        </android.support.design.widget.TextInputLayout>
 
                         <TextView
                             style="@style/header_font_size_title"
@@ -86,11 +99,18 @@
                             android:layout_height="wrap_content"
                             android:text="@string/tvRegister_telNumber" />
 
-                        <EditText
-                            android:id="@+id/etTellNumber"
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/etInputTelNumber"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="number" />
+                            app:errorEnabled="true">
+
+                            <android.support.design.widget.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="phone"/>
+
+                        </android.support.design.widget.TextInputLayout>
 
                         <TextView
                             style="@style/header_font_size_title"
@@ -98,24 +118,38 @@
                             android:layout_height="wrap_content"
                             android:text="@string/tvRegister_email" />
 
-                        <EditText
-                            android:id="@+id/etEmail"
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/etInputEmail"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="text" />
+                            app:errorEnabled="true">
+
+                            <android.support.design.widget.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="textEmailAddress"/>
+
+                        </android.support.design.widget.TextInputLayout>
 
                         <TextView
                             style="@style/header_font_size_title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="30dp"
-                            android:text="@string/tvRegister_userName" />
+                            android:text="@string/tvRegister_userName"/>
 
-                        <EditText
-                            android:id="@+id/etUserName"
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/etInputUserName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="text" />
+                            app:errorEnabled="true">
+
+                            <android.support.design.widget.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="text"/>
+
+                        </android.support.design.widget.TextInputLayout>
 
                         <TextView
                             style="@style/header_font_size_title"
@@ -123,11 +157,38 @@
                             android:layout_height="wrap_content"
                             android:text="@string/tvRegister_password" />
 
-                        <EditText
-                            android:id="@+id/etPassword"
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/etInputPassword"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="textPassword" />
+                            app:errorEnabled="true">
+
+                            <android.support.design.widget.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="textPassword" />
+
+                        </android.support.design.widget.TextInputLayout>
+
+                        <TextView
+                            style="@style/header_font_size_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/text_re_password"
+                            />
+
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/etInputRePassword"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:errorEnabled="true">
+
+                            <android.support.design.widget.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="textPassword" />
+
+                        </android.support.design.widget.TextInputLayout>
 
 
                     </LinearLayout>
@@ -140,7 +201,9 @@
                     android:layout_width="@dimen/editText_width"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="@string/btn_submit_register" />
+                    android:text="@string/btn_submit_register"
+                    android:onClick="RegisterSubmit"
+                    tools:ignore="OnClick" />
 
             </LinearLayout>
 
