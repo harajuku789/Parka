@@ -22,12 +22,14 @@ import com.iplds.minimintji.iplds.R;
 import com.iplds.minimintji.iplds.dao.User;
 import com.iplds.minimintji.iplds.manager.HttpManager;
 
+import libs.mjn.prettydialog.PrettyDialog;
+import libs.mjn.prettydialog.PrettyDialogCallback;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 // don't fot grt to implement nav select
-public class HomeActivity extends AppCompatActivity implements View.OnClickListener{
+public class HomeActivity extends AppCompatActivity {
 
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle actionBarDrawerToggle;
@@ -54,11 +56,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         tvSurnameHeader = (TextView) findViewById(R.id.tvSurnameHeader);
 
         //----- Toolbar -----
-        toolbar = (Toolbar)findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         //----- drawer manu -----
-        drawerLayout = (DrawerLayout)findViewById(R.id.drawerLayout);
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         actionBarDrawerToggle = new ActionBarDrawerToggle(
                 HomeActivity.this,
                 drawerLayout,
@@ -74,19 +76,16 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         // show applogo
         //getSupportActionBar().setLogo(R.drawable.app_logo_parka);
 
-
-
         //----- Button Logout
-        btnLogout = (Button)findViewById(R.id.btnLogout);
-        btnLogout.setOnClickListener(this);
+        btnLogout = (Button) findViewById(R.id.btnLogout);
 
         //----- Button Help Information
-        btnHelp = (Button)findViewById(R.id.btnHelp);
-        btnHelp.setOnClickListener(this);
+        btnHelp = (Button) findViewById(R.id.btnHelp);
+        //-------------------------------------------
 
         SharedPreferences prefs = getBaseContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
-        String userToken = prefs.getString("UserToken",null);
-        Log.d("TOken","User TOken is :"+userToken);
+        String userToken = prefs.getString("UserToken", null);
+        Log.d("TOken", "User TOken is :" + userToken);
 
         getUserInfo(userToken);
     }
@@ -99,8 +98,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 User userInfo = response.body();
-                Log.d("UserInfo","------------ UserInfo"+userInfo);
-                if (response.isSuccessful() && userInfo != null){
+                Log.d("UserInfo", "------------ UserInfo" + userInfo);
+                if (response.isSuccessful() && userInfo != null) {
                     tvName.setText(userInfo.getName());
                     tvSurname.setText(userInfo.getSurname());
 
@@ -111,7 +110,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                Toast.makeText(HomeActivity.this, "Error: "+String.valueOf(t.getMessage()),Toast.LENGTH_LONG).show();
+                Toast.makeText(HomeActivity.this, "Error: " + String.valueOf(t.getMessage()), Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -136,37 +135,81 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onClick(View view) {
-        if (view == btnLogout){
-//            final SharedPreferences prefs = getBaseContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
-//            String userToken = prefs.getString("UserToken",null);
-//            Log.d("token","*********** User Token :"+userToken);
-//
-//            Call call = HttpManager.getInstance()
-//                    .getService()
-//                    .logout(userToken);
-//            call.enqueue(new Callback<User>() {
-//                @Override
-//                public void onResponse(Call<User> call, Response<User> response) {
-//                    User resBody = response.body();
-//                    if (response.isSuccessful() && resBody == null){
-//                        Intent intent = new Intent(HomeActivity.this, MainActivity.class);
-//                        startActivity(intent);
-//                    }
-//                }
-//
-//                @Override
-//                public void onFailure(Call<User> call, Throwable t) {
-//                    Toast.makeText(HomeActivity.this, "Error: "+String.valueOf(t.getMessage()),Toast.LENGTH_LONG).show();
-//                }
-//            });
-            Intent intent = new Intent(HomeActivity.this, MainActivity.class);
-            startActivity(intent);
-        }
 
-        if (view == btnHelp){
-            startActivity(new Intent(HomeActivity.this, HelpActivity.class));
-        }
+    public void HelpForThisApplication(View view) {
+        startActivity(new Intent(HomeActivity.this, HelpActivity.class));
+    }
+
+    public void LogOut(View view) {
+        // Call this method for show about logout message
+        CreateDialog();
+/*
+        final SharedPreferences prefs = getBaseContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+        //------------
+            String userToken = prefs.getString("UserToken",null);
+            Log.d("token","*********** User Token :"+userToken);
+
+            Call call = HttpManager.getInstance()
+                    .getService()
+                    .logout(userToken);
+            call.enqueue(new Callback<User>() {
+                @Override
+                public void onResponse(Call<User> call, Response<User> response) {
+                    User resBody = response.body();
+                    if (response.isSuccessful() && resBody == null){
+                        Intent intent = new Intent(HomeActivity.this, MainActivity.class);
+                        startActivity(intent);
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<User> call, Throwable t) {
+                    Toast.makeText(HomeActivity.this, "Error: "+String.valueOf(t.getMessage()),Toast.LENGTH_LONG).show();
+                }
+            });
+
+            //------------
+
+        Intent intent = new Intent(HomeActivity.this, MainActivity.class);
+        startActivity(intent);
+
+        */
+    }
+
+    public void CreateDialog() {
+        new PrettyDialog(this).setTitle("Do you want to sign out?")
+                //.setMessage("555555")
+                .addButton(
+                        "Yes",     // button text
+                        R.color.pdlg_color_white,  // button text color
+                        R.color.colorAccent,  // button background color
+                        new PrettyDialogCallback() {  // button OnClick listener
+                            @Override
+                            public void onClick() {
+                                // Do what you gotta do
+                                final SharedPreferences prefs = getBaseContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+
+                                Intent intent = new Intent(HomeActivity.this, MainActivity.class);
+                                startActivity(intent);
+                            }
+                        }
+                )
+
+                .addButton(
+                        "Cancel",
+                        R.color.pdlg_color_white,
+                        R.color.pdlg_color_red,
+                        new PrettyDialogCallback() {
+                            @Override
+                            public void onClick() {
+                                Intent intent = new Intent(HomeActivity.this, HomeActivity.class);
+                                startActivity(intent);
+                            }
+                        }
+                )
+
+                .setIcon(R.drawable.exclamation_mark_512)
+
+                .show();
     }
 }

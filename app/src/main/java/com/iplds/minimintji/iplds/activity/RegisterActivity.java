@@ -9,8 +9,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.iplds.minimintji.iplds.R;
@@ -19,6 +17,7 @@ import com.iplds.minimintji.iplds.manager.HttpManager;
 
 import java.util.regex.Pattern;
 
+import libs.mjn.prettydialog.PrettyDialog;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -208,6 +207,31 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    // thissss
+    private void CreateDialog() {
+        // check if else with server
+
+        new PrettyDialog(this)
+                //show when regis success
+                .setTitle("Registration Successful")
+                .setIcon(R.drawable.checked)
+                .show();
+
+        new PrettyDialog(this)
+                // get error message form server ex username error
+                .setTitle("Something Wrong!")
+                .setMessage("...............") // description error message from server
+                .setIcon(R.drawable.exclamation_mark_512)
+                .show();
+
+        new PrettyDialog(this)
+                // Server Error --> 400 500 or something
+                .setTitle("Server Error")
+                .setMessage("400 500 or something") // description error message from server
+                .setIcon(R.drawable.server_error)
+                .show();
     }
 
     @Override

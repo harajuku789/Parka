@@ -18,6 +18,7 @@ import com.iplds.minimintji.iplds.R;
 import com.iplds.minimintji.iplds.dao.Token;
 import com.iplds.minimintji.iplds.manager.HttpManager;
 
+import libs.mjn.prettydialog.PrettyDialog;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -79,10 +80,29 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<Token> call, Throwable t) {
                 Toast.makeText(MainActivity.this, "Error: " + String.valueOf(t.getMessage()), Toast.LENGTH_LONG).show();
+
             }
         });
 
     }
+
+    // thissss
+    private void CreateDialog() {
+        // check if else with server
+        new PrettyDialog(this)
+                .setTitle("Something Wrong!")
+                .setMessage("Please check your Username & Password.")
+                .setIcon(R.drawable.exclamation_mark_512)
+                .show();
+
+        new PrettyDialog(this)
+                // Server Error --> 400 500 or something
+                .setTitle("Server Error")
+                .setMessage("400 500 or something") // description error message from server
+                .setIcon(R.drawable.server_error)
+                .show();
+    }
+
 
     public void Register(View view) {
         // use it when click Register button below Login button at Login page
