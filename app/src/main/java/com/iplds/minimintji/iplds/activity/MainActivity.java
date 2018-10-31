@@ -59,21 +59,20 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<Token> call, Response<Token> response) {
                 Token responseToken = response.body();
                 if (response.isSuccessful() && responseToken != null) {
-                    Intent intent = new Intent(MainActivity.this, HomeActivity.class);
-                    startActivity(intent);
-                    Toast.makeText(MainActivity.this, "Token: " + responseToken.getToken(), Toast.LENGTH_LONG).show();
+                    if (responseToken.getToken() != null){
+                        Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                        startActivity(intent);
+                        Toast.makeText(MainActivity.this, "Token: " + responseToken.getToken(), Toast.LENGTH_LONG).show();
 
-                    SharedPreferences prefs = getBaseContext().getSharedPreferences("userInfo",
-                            Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = prefs.edit();
-                    // add/edit/delete
-                    editor.putString("UserToken", responseToken.getToken());
-                    editor.apply(); //flush file
-
-//                        String value = prefs.getString("Hello", null);
-//                        Log.d("--- Hello sheardPref :",value);
-                } else {
-                    Toast.makeText(MainActivity.this, "Response: " + String.valueOf(response.code()), Toast.LENGTH_LONG).show();
+                        SharedPreferences prefs = getBaseContext().getSharedPreferences("userInfo",
+                                Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = prefs.edit();
+                        // add/edit/delete
+                        editor.putString("UserToken", responseToken.getToken());
+                        editor.apply(); //flush file
+                    } else {
+                        Toast.makeText(MainActivity.this, "Error: " + responseToken.getMessage(), Toast.LENGTH_LONG).show();
+                    }
                 }
             }
 
