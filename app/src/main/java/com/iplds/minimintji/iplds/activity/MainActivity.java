@@ -71,14 +71,16 @@ public class MainActivity extends AppCompatActivity {
                         editor.putString("UserToken", responseToken.getToken());
                         editor.apply(); //flush file
                     } else {
-                        Toast.makeText(MainActivity.this, "Error: " + responseToken.getMessage(), Toast.LENGTH_LONG).show();
+                        CreateDialogInvalidLogin(responseToken.getMessage());
+//                        Toast.makeText(MainActivity.this, "Error: " + responseToken.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 }
             }
 
             @Override
             public void onFailure(Call<Token> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "Error: " + String.valueOf(t.getMessage()), Toast.LENGTH_LONG).show();
+                CreateDialogServerError(t.getMessage());
+//                Toast.makeText(MainActivity.this, "Error: " + String.valueOf(t.getMessage()), Toast.LENGTH_LONG).show();
 
             }
         });
@@ -86,18 +88,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // thissss
-    private void CreateDialog() {
+    private void CreateDialogInvalidLogin(String message) {
         // check if else with server
         new PrettyDialog(this)
                 .setTitle("Something Wrong!")
-                .setMessage("Please check your Username & Password.")
+                .setMessage(message)
                 .setIcon(R.drawable.exclamation_mark_512)
                 .show();
 
+    }
+
+    private void CreateDialogServerError(String message){
         new PrettyDialog(this)
                 // Server Error --> 400 500 or something
                 .setTitle("Server Error")
-                .setMessage("400 500 or something") // description error message from server
+                .setMessage(message) // description error message from server
                 .setIcon(R.drawable.server_error)
                 .show();
     }
