@@ -15,5 +15,7 @@
     <dimen name="padding_buttom_inside">20dp</dimen>
     <dimen name="btn_margin_top">20dp</dimen>
     <dimen name="first_margin_buttom">10dp</dimen>
+    <dimen name="padd_nav_name">5dp</dimen>
+    <dimen name="height_nav_head">150dp</dimen>
 
 </resources>

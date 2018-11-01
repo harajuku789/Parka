@@ -8,8 +8,8 @@
     <string name="zone_message">Zone: Pink</string>
     <string name="floor_message">Floor: 10B</string>
     <string name="building_message">Building: 14 Floor Building</string>
-    <string name="hello_tvName">Ananya</string>
-    <string name="hello_tvSurname">Bantad</string>
+    <string name="hello_tvName">Firstname</string>
+    <string name="hello_tvSurname">Lastname</string>
     <string name="tvHello">Hello</string>
     <string name="tvRegister_name">Name</string>
     <string name="tvRegister_surname">Surname</string>

@@ -24,8 +24,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
-    Button btnLogin;
-    EditText etUserName, etPassword;
+    private Button btnLogin;
+    private EditText etUserName, etPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

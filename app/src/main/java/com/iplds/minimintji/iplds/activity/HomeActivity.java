@@ -3,18 +3,16 @@ package com.iplds.minimintji.iplds.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
-import android.support.annotation.Nullable;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.MenuItem;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,13 +28,12 @@ import retrofit2.Response;
 
 // don't fot grt to implement nav select
 public class HomeActivity extends AppCompatActivity {
-
-    DrawerLayout drawerLayout;
-    ActionBarDrawerToggle actionBarDrawerToggle;
-    Toolbar toolbar;
-    Button btnLogout;
-    Button btnHelp;
-    TextView tvName, tvSurname, tvNameHeader, tvSurnameHeader;
+    private DrawerLayout drawerLayout;
+    private ActionBarDrawerToggle actionBarDrawerToggle;
+    private Toolbar toolbar;
+    private Button btnLogout;
+    private Button btnHelp;
+    private TextView tvName, tvSurname, tvNameHeader, tvSurnameHeader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,24 +46,29 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void initInstances() {
-        //----- TextView -----
-        tvName = (TextView) findViewById(R.id.tvName);
-        tvSurname = (TextView) findViewById(R.id.tvSurname);
-        tvNameHeader = (TextView) findViewById(R.id.tvNameHeader);
-        tvSurnameHeader = (TextView) findViewById(R.id.tvSurnameHeader);
+        //----- TextView ----- Waiting for fragment
+        //tvName = (TextView) findViewById(R.id.tvName);
+        //tvSurname = (TextView) findViewById(R.id.tvSurname);
 
         //----- Toolbar -----
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
 
         //----- drawer manu -----
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         actionBarDrawerToggle = new ActionBarDrawerToggle(
                 HomeActivity.this,
                 drawerLayout,
+                toolbar,
                 R.string.open_drawer,
                 R.string.cloes_drawer);
 
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
+
+        /*
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
 
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -75,12 +77,7 @@ public class HomeActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         // show applogo
         //getSupportActionBar().setLogo(R.drawable.app_logo_parka);
-
-        //----- Button Logout
-        btnLogout = (Button) findViewById(R.id.btnLogout);
-
-        //----- Button Help Information
-        btnHelp = (Button) findViewById(R.id.btnHelp);
+        */
         //-------------------------------------------
 
         SharedPreferences prefs = getBaseContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
@@ -88,6 +85,15 @@ public class HomeActivity extends AppCompatActivity {
         Log.d("TOken", "User TOken is :" + userToken);
 
         getUserInfo(userToken);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
     }
 
     private void getUserInfo(String userToken) {
@@ -100,11 +106,12 @@ public class HomeActivity extends AppCompatActivity {
                 User userInfo = response.body();
                 Log.d("UserInfo", "------------ UserInfo" + userInfo);
                 if (response.isSuccessful() && userInfo != null) {
-                    tvName.setText(userInfo.getName());
-                    tvSurname.setText(userInfo.getSurname());
+                    // ----- waiting for fragment -----
+                    //tvName.setText(userInfo.getName());
+                    //tvSurname.setText(userInfo.getSurname());
 
-                    tvNameHeader.setText(userInfo.getName());
-                    tvSurnameHeader.setText(userInfo.getSurname());
+                    //tvNameHeader.setText(userInfo.getName());
+                    //tvSurnameHeader.setText(userInfo.getSurname());
                 }
             }
 
@@ -113,26 +120,6 @@ public class HomeActivity extends AppCompatActivity {
                 Toast.makeText(HomeActivity.this, "Error: " + String.valueOf(t.getMessage()), Toast.LENGTH_LONG).show();
             }
         });
-    }
-
-
-    @Override
-    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
-        actionBarDrawerToggle.syncState();
-        super.onPostCreate(savedInstanceState);
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        actionBarDrawerToggle.onConfigurationChanged(newConfig);
-        super.onConfigurationChanged(newConfig);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (actionBarDrawerToggle.onOptionsItemSelected(item))
-            return true;
-        return super.onOptionsItemSelected(item);
     }
 
 

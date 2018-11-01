@@ -9,9 +9,9 @@ import android.support.v7.widget.Toolbar;
 import com.iplds.minimintji.iplds.R;
 
 public class HelpActivity extends AppCompatActivity {
-    Toolbar toolbar;
-    DrawerLayout drawerLayout;
-    ActionBarDrawerToggle actionBarDrawerToggle;
+    private Toolbar toolbar;
+    private DrawerLayout drawerLayout;
+    private ActionBarDrawerToggle actionBarDrawerToggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

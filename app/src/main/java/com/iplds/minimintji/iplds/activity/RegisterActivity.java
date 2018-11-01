@@ -23,9 +23,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class RegisterActivity extends AppCompatActivity {
-    android.support.v7.widget.Toolbar toolbar;
-    DrawerLayout drawerLayout;
-    ActionBarDrawerToggle actionBarDrawerToggle;
+    private android.support.v7.widget.Toolbar toolbar;
+    private DrawerLayout drawerLayout;
+    private ActionBarDrawerToggle actionBarDrawerToggle;
     private TextInputLayout etInputName, etInputSurname, etInputTelNumber, etInputEmail,
             etInputUserName, etInputPassword, etInputRePassword;
 
