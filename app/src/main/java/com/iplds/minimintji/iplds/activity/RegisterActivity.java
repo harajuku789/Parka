@@ -58,24 +58,6 @@ public class RegisterActivity extends AppCompatActivity {
         etInputPassword = (TextInputLayout) findViewById(R.id.etInputPassword);
         etInputRePassword = (TextInputLayout) findViewById(R.id.etInputRePassword);
 
-        //----- ToolBar -----
-        toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbarBack);
-        setSupportActionBar(toolbar);
-
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout_register);
-        actionBarDrawerToggle = new ActionBarDrawerToggle(
-                RegisterActivity.this,
-                drawerLayout,
-                R.string.open_drawer,
-                R.string.cloes_drawer);
-
-        drawerLayout.setDrawerListener(actionBarDrawerToggle);
-
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        getSupportActionBar().setTitle("Back");
-        //--------------------
     }
 
     private boolean ValidateName() {

@@ -18,24 +18,10 @@ public class HelpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help);
 
-        initinstances();
+        initInstances();
     }
 
-    private void initinstances() {
-        toolbar = (Toolbar)findViewById(R.id.toolbarBack);
-        setSupportActionBar(toolbar);
-
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout_help);
-        actionBarDrawerToggle = new ActionBarDrawerToggle(HelpActivity.this,
-                drawerLayout,
-                R.string.open_drawer,
-                R.string.cloes_drawer);
-        drawerLayout.setDrawerListener(actionBarDrawerToggle);
-
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        getSupportActionBar().setTitle("Back");
+    private void initInstances() {
 
     }
 

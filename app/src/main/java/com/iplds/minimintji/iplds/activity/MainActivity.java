@@ -45,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
         etUserName.addTextChangedListener(LoginTextWatcher);
         etPassword.addTextChangedListener(LoginTextWatcher);
 
+        getSupportActionBar().hide();
+
     }
 
 
