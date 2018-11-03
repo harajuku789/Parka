@@ -17,5 +17,7 @@
     <dimen name="first_margin_buttom">10dp</dimen>
     <dimen name="padd_nav_name">5dp</dimen>
     <dimen name="height_nav_head">150dp</dimen>
+    <dimen name="padd_field">10dp</dimen>
+    <dimen name="margin_buttom_field">10dp</dimen>
 
 </resources>

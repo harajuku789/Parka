@@ -13,18 +13,17 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_marginBottom="@dimen/first_margin_buttom">
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_margin="@dimen/first_layout_margin"
                     android:background="@drawable/bg_radius_white"
                     android:gravity="center_horizontal"
@@ -193,17 +192,19 @@
 
                 </LinearLayout>
 
-                <Button
-                    android:id="@+id/btnRegisSubmit"
-                    style="@style/header_font_size_title"
-                    android:layout_width="@dimen/editText_width"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@string/btn_submit_register"
-                    android:onClick="RegisterSubmit"
-                    tools:ignore="OnClick" />
-
             </LinearLayout>
+
+            <Button
+                android:id="@+id/btnRegisSubmit"
+                style="@style/header_font_size_title"
+                android:background="@drawable/bg_radius_btn"
+                android:layout_width="@dimen/editText_width"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/margin_buttom_field"
+                android:text="@string/btn_submit_register"
+                android:onClick="RegisterSubmit"
+                tools:ignore="OnClick" />
 
         </LinearLayout>
 

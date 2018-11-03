@@ -32,6 +32,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:inputType="text"
+            android:background="@drawable/bg_radius_field"
+            android:padding="@dimen/padd_field"
+            android:layout_marginBottom="@dimen/margin_buttom_field"
             android:hint="@string/hint_username" />
 
         <EditText
@@ -40,6 +43,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:inputType="textPassword"
+            android:background="@drawable/bg_radius_field"
+            android:padding="@dimen/padd_field"
             android:hint="@string/hint_password"/>
 
     </LinearLayout>
@@ -51,6 +56,7 @@
         android:layout_width="@dimen/editText_width"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/btn_margin_top"
+        android:background="@drawable/bg_radius_btn"
         android:text="@string/btn_text_login"
         android:enabled="false"
         android:onClick="Login"

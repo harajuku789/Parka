@@ -6,4 +6,5 @@
     <color name="bg_color">#f2f2f2</color>
     <color name="alpha_color">#00000000</color>
     <color name="bg_btn_menu">#FFFFFF</color>
+    <color name="message_color">#ece5d2</color>
 </resources>
