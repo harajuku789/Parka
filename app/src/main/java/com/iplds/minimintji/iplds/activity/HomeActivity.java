@@ -4,8 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -20,7 +23,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.iplds.minimintji.iplds.R;
+import com.iplds.minimintji.iplds.adapter.ViewPagerAdapter;
 import com.iplds.minimintji.iplds.dao.User;
+import com.iplds.minimintji.iplds.fragment.HomeFragment;
+import com.iplds.minimintji.iplds.fragment.ShowStatusFragment;
 import com.iplds.minimintji.iplds.manager.HttpManager;
 
 import libs.mjn.prettydialog.PrettyDialog;
@@ -37,6 +43,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private Button btnLogout;
     private Button btnHelp;
     private TextView tvName, tvSurname, tvNameHeader, tvSurnameHeader;
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +88,19 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         Log.d("TOken", "User TOken is :" + userToken);
 
         getUserInfo(userToken);
+
+    //----------------------------
+        tabLayout = (TabLayout) findViewById(R.id.tablayout_id);
+        viewPager = (ViewPager) findViewById(R.id.viewpager_id);
+
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        // Add fragements
+        adapter.AddFragment(new HomeFragment(),"All User");
+        adapter.AddFragment(new ShowStatusFragment(),"User Detail");
+
+        // Adapter setting
+        viewPager.setAdapter(adapter);
+        tabLayout.setupWithViewPager(viewPager);
     }
 
     @Override
@@ -105,8 +126,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     //tvName.setText(userInfo.getName());
                     //tvSurname.setText(userInfo.getSurname());
 
-                    //tvNameHeader.setText(userInfo.getName());
-                    //tvSurnameHeader.setText(userInfo.getSurname());
+                    tvNameHeader.setText(userInfo.getName());
+                    tvSurnameHeader.setText(userInfo.getSurname());
                 }
             }
 
