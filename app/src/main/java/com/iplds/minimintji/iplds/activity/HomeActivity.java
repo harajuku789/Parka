@@ -29,6 +29,8 @@ import com.iplds.minimintji.iplds.fragment.HomeFragment;
 import com.iplds.minimintji.iplds.fragment.ShowStatusFragment;
 import com.iplds.minimintji.iplds.manager.HttpManager;
 
+import org.w3c.dom.Text;
+
 import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;
 import retrofit2.Call;
@@ -42,7 +44,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private Toolbar toolbar;
     private Button btnLogout;
     private Button btnHelp;
-    private TextView tvName, tvSurname, tvNameHeader, tvSurnameHeader;
+    private TextView tvName, tvSurname, tvNameHeader, tvSurnameHeader, tvfirstname, tvlastname;
     private TabLayout tabLayout;
     private ViewPager viewPager;
 
@@ -80,7 +82,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
-
+        View header = navigationView.getHeaderView(0);
+        tvfirstname = (TextView) header.findViewById(R.id.tvfirstname);
+        tvlastname = (TextView) header.findViewById(R.id.tvlastname);
     //--------------------------
 
         SharedPreferences prefs = getBaseContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
@@ -95,12 +99,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         // Add fragements
-        adapter.AddFragment(new HomeFragment(),"All User");
-        adapter.AddFragment(new ShowStatusFragment(),"User Detail");
+        adapter.AddFragment(new HomeFragment(),"Parking Position");
+        adapter.AddFragment(new ShowStatusFragment(),"Show Available");
 
         // Adapter setting
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
+    //----------------------------
     }
 
     @Override
@@ -126,8 +131,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     //tvName.setText(userInfo.getName());
                     //tvSurname.setText(userInfo.getSurname());
 
-                    tvNameHeader.setText(userInfo.getName());
-                    tvSurnameHeader.setText(userInfo.getSurname());
+                    tvfirstname.setText(userInfo.getName());
+                    tvlastname.setText(userInfo.getSurname());
                 }
             }
 
