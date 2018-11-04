@@ -3,22 +3,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
+
     <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:gravity="center"
         android:orientation="vertical">
-        <include layout="@layout/message_even" />
-        <include layout="@layout/message_even" />
-        <include layout="@layout/message_even" />
-        <include layout="@layout/message_even" />
-        <include layout="@layout/message_even" />
-        <include layout="@layout/message_even" />
-        <include layout="@layout/message_even" />
-        <include layout="@layout/message_even" />
-        <include layout="@layout/message_even" />
-        <include layout="@layout/message_even" />
-        <include layout="@layout/message_even" />
-        <include layout="@layout/message_even" />
+
+        <ImageView
+            android:layout_width="@dimen/img_size_noparking"
+            android:layout_height="@dimen/img_size_noparking"
+            android:src="@drawable/cityscape" />
+
+        <TextView
+            style="@style/header_font_size_title3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padd_field"
+            android:text="No Parking" />
+
     </LinearLayout>
+
 </ScrollView>

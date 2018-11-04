@@ -19,5 +19,9 @@
     <dimen name="height_nav_head">150dp</dimen>
     <dimen name="padd_field">10dp</dimen>
     <dimen name="margin_buttom_field">10dp</dimen>
+    <dimen name="padd_header">20dp</dimen>
+    <dimen name="img_size_noparking">130dp</dimen>
+    <dimen name="first_layout_margintop">20dp</dimen>
+    <dimen name="width_title_status">340dp</dimen>
 
 </resources>

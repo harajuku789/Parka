@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/first_layout_margintop"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="@dimen/first_layout_margin">
+
+            <TextView
+                android:id="@+id/location"
+                style="@style/header_font_size_title"
+                android:layout_width="@dimen/editText_width"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_buttom_field"
+                android:background="@drawable/bg_radius_field"
+                android:padding="@dimen/padd_field"
+                android:text="@string/location" />
+
+            <TextView
+                android:id="@+id/building"
+                style="@style/header_font_size_title"
+                android:layout_width="@dimen/editText_width"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_buttom_field"
+                android:background="@drawable/bg_radius_field"
+                android:padding="@dimen/padd_field"
+                android:text="@string/building_message" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/first_layout_margintop"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="@dimen/first_layout_margin">
+
+            <LinearLayout
+                android:layout_width="@dimen/width_title_status"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_radius_title"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <TextView
+                    style="@style/title_bar_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:padding="@dimen/padd_field"
+                    android:text="Floors" />
+
+                <TextView
+                    style="@style/title_bar_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:gravity="right"
+                    android:padding="@dimen/padd_field"
+                    android:text="Available" />
+
+            </LinearLayout>
+
+            <include layout="@layout/zone_status" />
+
+            <include layout="@layout/zone_status" />
+
+            <include layout="@layout/zone_status" />
+
+            <include layout="@layout/zone_status" />
+
+            <include layout="@layout/zone_status" />
+
+            <include layout="@layout/zone_status" />
+
+            <include layout="@layout/zone_status" />
+
+            <include layout="@layout/zone_status" />
+
+            <include layout="@layout/zone_status" />
+
+            <include layout="@layout/zone_status" />
+
+            <include layout="@layout/zone_status" />
+
+            <include layout="@layout/zone_status" />
+
+            <include layout="@layout/zone_status" />
+
+            <include layout="@layout/zone_status" />
+
+            <include layout="@layout/zone_status" />
+
+            <include layout="@layout/zone_status" />
+
+            <include layout="@layout/zone_status" />
+
+            <include layout="@layout/zone_status" />
+
+            <include layout="@layout/zone_status" />
+
+            <include layout="@layout/zone_status" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>
+
+

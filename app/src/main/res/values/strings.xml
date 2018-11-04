@@ -30,4 +30,6 @@
     <string name="btn_text_register">Register</string>
     <string name="btn_text_login">Login</string>
     <string name="text_re_password">Re-Password</string>
+    <string name="parked_header">Parked History</string>
+    <string name="location">KMUTT</string>
 </resources>
