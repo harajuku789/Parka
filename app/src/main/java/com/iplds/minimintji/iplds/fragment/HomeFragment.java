@@ -5,6 +5,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.iplds.minimintji.iplds.R;
 
@@ -14,6 +17,9 @@ import com.iplds.minimintji.iplds.R;
  */
 public class HomeFragment extends Fragment {
 
+    ProgressBar progressBar;
+    ImageView ivCar;
+    TextView tvNoParking;
 
     public HomeFragment() {
         super();
@@ -36,6 +42,11 @@ public class HomeFragment extends Fragment {
 
     private void initInstances(View rootView) {
         // Init 'View' instance(s) with rootView.findViewById here
+        progressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
+        ivCar = (ImageView) rootView.findViewById(R.id.ivCar);
+        tvNoParking = (TextView) rootView.findViewById(R.id.tvNoParking);
+
+
 
     }
 
