@@ -23,7 +23,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class RegisterActivity extends AppCompatActivity {
-    private android.support.v7.widget.Toolbar toolbar;
+    private android.support.v7.widget.Toolbar toolbarRegister;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private TextInputLayout etInputName, etInputSurname, etInputTelNumber, etInputEmail,
@@ -57,6 +57,13 @@ public class RegisterActivity extends AppCompatActivity {
         etInputUserName = (TextInputLayout) findViewById(R.id.etInputUserName);
         etInputPassword = (TextInputLayout) findViewById(R.id.etInputPassword);
         etInputRePassword = (TextInputLayout) findViewById(R.id.etInputRePassword);
+
+        //----- Toolbar -----
+        toolbarRegister = findViewById(R.id.toolbarRegister);
+        setSupportActionBar(toolbarRegister);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
 
     }
 

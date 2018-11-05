@@ -41,7 +41,7 @@ import retrofit2.Response;
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener  {
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
-    private Toolbar toolbar;
+    private Toolbar toolbarHome;
     private Button btnLogout;
     private Button btnHelp;
     private TextView tvName, tvSurname, tvNameHeader, tvSurnameHeader, tvfirstname, tvlastname;
@@ -64,10 +64,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         //tvSurname = (TextView) findViewById(R.id.tvSurname);
 
         //----- Toolbar -----
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        toolbarHome = (Toolbar) findViewById(R.id.toolbarHome);
+        setSupportActionBar(toolbarHome);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-
 
         //----- drawer manu -----
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -76,7 +75,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         actionBarDrawerToggle = new ActionBarDrawerToggle(
                 HomeActivity.this,
                 drawerLayout,
-                toolbar,
+                toolbarHome,
                 R.string.open_drawer,
                 R.string.cloes_drawer);
 

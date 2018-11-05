@@ -9,7 +9,7 @@ import android.support.v7.widget.Toolbar;
 import com.iplds.minimintji.iplds.R;
 
 public class HelpActivity extends AppCompatActivity {
-    private Toolbar toolbar;
+    private Toolbar toolbarHelp;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
 
@@ -22,6 +22,10 @@ public class HelpActivity extends AppCompatActivity {
     }
 
     private void initInstances() {
+        toolbarHelp = findViewById(R.id.toolbarHelp);
+        setSupportActionBar(toolbarHelp);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
     }
 
