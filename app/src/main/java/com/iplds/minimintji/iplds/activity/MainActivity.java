@@ -81,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
                     if (responseToken.getToken() != null){
                         Intent intent = new Intent(MainActivity.this, HomeActivity.class);
                         startActivity(intent);
+                        finish();
                         Toast.makeText(MainActivity.this, "Token: " + responseToken.getToken(), Toast.LENGTH_LONG).show();
 
                         SharedPreferences prefs = getBaseContext().getSharedPreferences("userInfo",

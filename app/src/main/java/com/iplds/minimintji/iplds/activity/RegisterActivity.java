@@ -186,6 +186,7 @@ public class RegisterActivity extends AppCompatActivity {
                 if (response.isSuccessful() && userResponse != null) {
                     Log.d("User register", "/////////// User register info: " + userResponse);
                     startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+                    finish();
                 }
             }
 
