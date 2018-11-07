@@ -4,10 +4,10 @@
     <string name="cloes_drawer">Cloes menu</string>
     <string name="mess_end_time">26/08/2018 8:09 pm</string>
     <string name="mess_start_time">26/08/2018 12:15 pm</string>
-    <string name="position_message">Position: 2</string>
-    <string name="zone_message">Zone: Pink</string>
-    <string name="floor_message">Floor: 10B</string>
-    <string name="building_message">Building: 14 Floor Building</string>
+    <string name="position_message">2</string>
+    <string name="zone_message">Pink</string>
+    <string name="floor_message">10B</string>
+    <string name="building_message">14 Floor Building</string>
     <string name="hello_tvName">Firstname</string>
     <string name="hello_tvSurname">Lastname</string>
     <string name="tvHello">Hello</string>

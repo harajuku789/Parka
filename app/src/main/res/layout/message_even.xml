@@ -14,74 +14,99 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="0.33">
+
+            <TextView
+                android:id="@+id/tvPostionBuilding"
+                style="@style/header_font_size_title2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Position: " />
+
+            <TextView
+                android:id="@+id/tvPosition"
+                style="@style/header_font_size_title2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/position_message" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="0.33">
+
+            <TextView
+                android:id="@+id/tvZoneBuilding"
+                style="@style/header_font_size_title2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Zone: " />
+
+            <TextView
+                android:id="@+id/tvZone"
+                style="@style/header_font_size_title2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/zone_message" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="0.33">
+
+            <TextView
+                android:id="@+id/tvFloorBuilding"
+                style="@style/header_font_size_title2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Floor: " />
+
+            <TextView
+                android:id="@+id/tvFloor"
+                style="@style/header_font_size_title2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/floor_message" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
         <TextView
-            android:id="@+id/tvPosition"
+            android:id="@+id/tvLocation"
             style="@style/header_font_size_title2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/mess_margin_right"
-            android:text="@string/position_message" />
+            android:text="Building: " />
 
         <TextView
-            android:id="@+id/tvZone"
+            android:id="@+id/tvBuilding"
             style="@style/header_font_size_title2"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/mess_margin_right"
-            android:text="@string/zone_message" />
-
-        <TextView
-            android:id="@+id/tvFloor"
-            style="@style/header_font_size_title2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/mess_margin_right"
-            android:text="@string/floor_message" />
-
+            android:text="@string/building_message" />
 
     </LinearLayout>
 
 
     <TextView
-        android:id="@+id/tvBuilding"
-        style="@style/header_font_size_title2"
-        android:layout_width="match_parent"
+        android:id="@+id/tvStartTime"
+        style="@style/mess_time_martop"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/building_message" />
-
-    <LinearLayout
-        android:id="@+id/dateTimeMessage"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-
-        <TextView
-            android:id="@+id/tvStartTime"
-            style="@style/mess_time_martop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/mess_margin_right"
-            android:text="@string/mess_start_time" />
-
-        <TextView
-            android:id="@+id/tvDat"
-            style="@style/mess_time_martop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/mess_margin_right"
-            android:text="@string/content_between_dateTime" />
-
-        <TextView
-            android:id="@+id/tvEndTime"
-            style="@style/mess_time_martop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/mess_margin_right"
-            android:text="@string/mess_end_time" />
-
-
-    </LinearLayout>
-
+        android:text="@string/mess_start_time" />
 
 </LinearLayout>

@@ -3,6 +3,7 @@ package com.iplds.minimintji.iplds.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextSwitcher;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +31,8 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
     private Button btnLogin;
     private EditText etUserName, etPassword;
+    private LinearLayout mainActivity;
+    private Snackbar snackbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
 
         etPassword.setOnEditorActionListener(editorActionListener);
 
+        mainActivity = findViewById(R.id.mainAction);
+
     }
 
     private TextView.OnEditorActionListener editorActionListener = new TextView.OnEditorActionListener() {
@@ -68,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void Login(View view) {
+        ShowSnackBar();
         // use it when click Loin button at Login page
         Call<Token> call = HttpManager.getInstance()
                 .getService()
@@ -79,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
                 Token responseToken = response.body();
                 if (response.isSuccessful() && responseToken != null) {
                     if (responseToken.getToken() != null){
+                        snackbar.dismiss();
                         Intent intent = new Intent(MainActivity.this, HomeActivity.class);
                         startActivity(intent);
                         finish();
@@ -107,6 +115,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void ShowSnackBar() {
+       snackbar = Snackbar.make(mainActivity, "Please waiting for Login ...",Snackbar.LENGTH_INDEFINITE);
+        snackbar.show();
+    }
+
     // thissss
     private void CreateDialogInvalidLogin(String message) {
         // check if else with server
@@ -115,6 +128,8 @@ public class MainActivity extends AppCompatActivity {
                 .setMessage(message)
                 .setIcon(R.drawable.exclamation_mark_512)
                 .show();
+
+        snackbar.dismiss();
 
     }
 
@@ -125,6 +140,8 @@ public class MainActivity extends AppCompatActivity {
                 .setMessage(message) // description error message from server
                 .setIcon(R.drawable.server_error)
                 .show();
+
+        snackbar.dismiss();
     }
 
 
