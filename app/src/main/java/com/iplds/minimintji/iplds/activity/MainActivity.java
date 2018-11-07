@@ -33,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
     private EditText etUserName, etPassword;
     private LinearLayout mainActivity;
     private Snackbar snackbar;
+    private SessionManager sessionManager;
+    private String Token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,18 +88,30 @@ public class MainActivity extends AppCompatActivity {
                 Token responseToken = response.body();
                 if (response.isSuccessful() && responseToken != null) {
                     if (responseToken.getToken() != null){
+                        //------------------------
+
+                        Token = responseToken.getToken();
+                        SessionManager sessionManager = new SessionManager(MainActivity.this);
+                        sessionManager.setToken(Token);
+
+                        //------------------------
                         snackbar.dismiss();
                         Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                        intent.putExtra("userToken", Token);
                         startActivity(intent);
                         finish();
                         Toast.makeText(MainActivity.this, "Token: " + responseToken.getToken(), Toast.LENGTH_LONG).show();
 
+
+                        //------------------------
+                        /*
                         SharedPreferences prefs = getBaseContext().getSharedPreferences("userInfo",
                                 Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = prefs.edit();
                         // add/edit/delete
                         editor.putString("UserToken", responseToken.getToken());
                         editor.apply(); //flush file
+                        */
                     } else {
                         CreateDialogInvalidLogin(responseToken.getMessage());
 //                        Toast.makeText(MainActivity.this, "Error: " + responseToken.getMessage(), Toast.LENGTH_LONG).show();
@@ -172,6 +186,5 @@ public class MainActivity extends AppCompatActivity {
 
         }
     };
-
 
 }

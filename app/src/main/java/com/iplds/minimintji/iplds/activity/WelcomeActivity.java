@@ -14,14 +14,25 @@ public class WelcomeActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
+
+        final SessionManager sessionManager = new SessionManager(WelcomeActivity.this);
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent welcomeInten = new Intent(WelcomeActivity.this, MainActivity.class);
-                startActivity(welcomeInten);
-                finish();
+                if (sessionManager.getToken() != "") {
+                    Intent welcomeIntent1 = new Intent(WelcomeActivity.this, HomeActivity.class);
+                    welcomeIntent1.putExtra("userToken", sessionManager.getToken());
+                    startActivity(welcomeIntent1);
+                    finish();
+                }else{
+                    Intent welcomeIntent2 = new Intent(WelcomeActivity.this, MainActivity.class);
+                    startActivity(welcomeIntent2);
+                    finish();
+                }
+
             }
-        },SPLASH_TIME_OUT);
+        }, SPLASH_TIME_OUT);
     }
 
 }

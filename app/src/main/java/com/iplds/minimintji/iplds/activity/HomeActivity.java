@@ -47,6 +47,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private TextView tvName, tvSurname, tvNameHeader, tvSurnameHeader, tvfirstname, tvlastname;
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    private String userToken;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,9 +86,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         tvfirstname = (TextView) header.findViewById(R.id.tvfirstname);
         tvlastname = (TextView) header.findViewById(R.id.tvlastname);
     //--------------------------
-
+        /*
         SharedPreferences prefs = getBaseContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
         String userToken = prefs.getString("UserToken", null);
+        */
+
+        userToken = getIntent().getExtras().getString("userToken");
         Log.d("TOken", "User TOken is :" + userToken);
 
         getUserInfo(userToken);
@@ -180,6 +184,28 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        switch (menuItem.getItemId()){
+            case R.id.nav_help:
+                startActivity(new Intent(HomeActivity.this, HelpActivity.class));
+                break;
+
+            case R.id.nav_logout:
+                /*
+                new SessionManager(HomeActivity.this).removeUser();
+                Intent intent = new Intent(HomeActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+                */
+                CreateDialog();
+                break;
+        }
+
+        return true;
+    }
+
+
     public void CreateDialog() {
         final  PrettyDialog pDialog = new PrettyDialog(this);
                 pDialog.setTitle("Do you want to sign out?")
@@ -192,7 +218,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                             @Override
                             public void onClick() {
                                 // Do what you gotta do
-                                final SharedPreferences prefs = getBaseContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+                                //final SharedPreferences prefs = getBaseContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+
+                                //------------------
+                                new SessionManager(HomeActivity.this).removeUser();
+                                Toast.makeText(HomeActivity.this, "Token : "+ userToken,Toast.LENGTH_SHORT).show();
+                                //------------------
 
                                 Intent intent = new Intent(HomeActivity.this, MainActivity.class);
                                 startActivity(intent);
@@ -218,18 +249,4 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 .show();
     }
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        switch (menuItem.getItemId()){
-            case R.id.nav_help:
-                startActivity(new Intent(HomeActivity.this, HelpActivity.class));
-                break;
-
-            case R.id.nav_logout:
-                CreateDialog();
-                break;
-        }
-
-        return true;
-    }
 }
