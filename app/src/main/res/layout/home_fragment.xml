@@ -14,146 +14,43 @@
         android:paddingLeft="24dp"
         android:paddingRight="24dp"
         >
-            <ProgressBar
+        <ProgressBar
             android:id="@+id/progressBar"
             android:layout_width="130dp"
             android:layout_height="130dp"
             android:layout_centerInParent="true"
             android:progressBackgroundTint="@color/colorPrimary" />
 
-            <ImageView
-                android:id="@+id/ivCar"
-                android:layout_centerInParent="true"
-                android:layout_width="@dimen/img_size_noparking"
-                android:layout_height="@dimen/img_size_noparking"
-                android:src="@drawable/car" />
+        <ImageView
+            android:id="@+id/ivCar"
+            android:layout_centerInParent="true"
+            android:layout_width="@dimen/img_size_noparking"
+            android:layout_height="@dimen/img_size_noparking"
+            android:src="@drawable/car" />
 
-            <TextView
-                android:id="@+id/tvNoParking"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/padd_field"
-                android:layout_below="@+id/ivCar"
-                android:layout_centerInParent="true"
-                android:text="No Parking"
-                style="@style/header_font_size_title3"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/tvNoParking"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:padding="@dimen/padd_header">
+            android:padding="@dimen/padd_field"
+            android:layout_below="@+id/ivCar"
+            android:layout_centerInParent="true"
+            android:text="No Parking"
+            style="@style/header_font_size_title3"/>
 
-            <TextView
-                style="@style/header_font_size_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/mess_margin_right"
-                android:text="@string/hello_tvName" />
+        <include android:id="@+id/layoutUserInfo" layout="@layout/user_info"/>
 
-            <TextView
-                style="@style/header_font_size_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/hello_tvSurname" />
-
-        </LinearLayout>
-
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:id="@id/message"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_message"
-            android:background="@drawable/message_box"
-            android:orientation="vertical"
-            android:padding="@dimen/mess_box_padding"
-            android:layout_centerInParent="true">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tvPosition"
-                    style="@style/header_font_size_title2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/mess_margin_right"
-                    android:text="@string/position_message" />
-
-                <TextView
-                    android:id="@+id/tvZone"
-                    style="@style/header_font_size_title2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/mess_margin_right"
-                    android:text="@string/zone_message" />
-
-                <TextView
-                    android:id="@+id/tvFloor"
-                    style="@style/header_font_size_title2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/mess_margin_right"
-                    android:text="@string/floor_message" />
-
-
-            </LinearLayout>
-
-
-            <TextView
-                android:id="@+id/tvBuilding"
-                style="@style/header_font_size_title2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/building_message" />
-
-            <LinearLayout
-                android:id="@+id/dateTimeMessage"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-
-                <TextView
-                    android:id="@+id/tvStartTime"
-                    style="@style/mess_time_martop"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/mess_margin_right"
-                    android:text="@string/mess_start_time" />
-
-                <TextView
-                    android:id="@+id/tvDat"
-                    style="@style/mess_time_martop"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/mess_margin_right"
-                    android:text="@string/content_between_dateTime" />
-
-                <TextView
-                    android:id="@+id/tvEndTime"
-                    style="@style/mess_time_martop"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/mess_margin_right"
-                    android:text="@string/mess_end_time" />
-
-            </LinearLayout>
-
-        </LinearLayout>
+        <include android:id="@+id/layoutCurrentMessage" layout="@layout/message_home"/>
 
         <Button
+            android:id="@+id/btnShowMore"
             android:layout_centerHorizontal="true"
-            android:layout_below="@+id/message"
+            android:layout_below="@+id/tvNoParking"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_buttom_field"
             android:background="@drawable/bg_radius_btn"
-            android:text="Show more" />
+            android:text="Parking" />
 
     </RelativeLayout>
 

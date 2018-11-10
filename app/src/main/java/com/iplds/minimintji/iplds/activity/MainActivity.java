@@ -1,27 +1,24 @@
 package com.iplds.minimintji.iplds.activity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextSwitcher;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.iplds.minimintji.iplds.R;
 import com.iplds.minimintji.iplds.dao.Token;
 import com.iplds.minimintji.iplds.manager.HttpManager;
+import com.iplds.minimintji.iplds.manager.SessionManager;
 
 import libs.mjn.prettydialog.PrettyDialog;
 import retrofit2.Call;
@@ -91,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
                         //------------------------
 
                         Token = responseToken.getToken();
-                        SessionManager sessionManager = new SessionManager(MainActivity.this);
+                        sessionManager = new SessionManager(MainActivity.this);
                         sessionManager.setToken(Token);
 
                         //------------------------

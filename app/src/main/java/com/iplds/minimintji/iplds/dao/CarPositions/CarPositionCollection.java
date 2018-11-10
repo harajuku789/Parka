@@ -5,15 +5,15 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class CarPositionCollection {
-    @SerializedName("result")           List<CarPositions> carPositions;
-    @SerializedName("result")           String message;
+    @SerializedName("result")           CarPositions carPositions;
+    @SerializedName("message")           String message;
     @SerializedName("status_code")      int statusCode;
 
-    public List<CarPositions> getCarPositions() {
+    public CarPositions getCarPositions() {
         return carPositions;
     }
 
-    public void setCarPositions(List<CarPositions> carPositions) {
+    public void setCarPositions(CarPositions carPositions) {
         this.carPositions = carPositions;
     }
 

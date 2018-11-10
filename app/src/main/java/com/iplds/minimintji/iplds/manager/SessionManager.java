@@ -1,4 +1,4 @@
-package com.iplds.minimintji.iplds.activity;
+package com.iplds.minimintji.iplds.manager;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -13,23 +13,29 @@ public class SessionManager {
         // TODO Auto-generated constructor stub
         this.context = context;
         sharedPreferences = context.getSharedPreferences("userInfo", Context.MODE_PRIVATE);
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+//        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
 
     public String getToken() {
-        token = sharedPreferences.getString("userToken", "");
+        token = sharedPreferences.getString("userToken", null);
         return token;
     }
 
     public void setToken(String token) {
         this.token = token;
-        sharedPreferences.edit().putString("userToken", token).commit();
+//        sharedPreferences.edit().putString("userToken", token).commit();
+//        sharedPreferences.edit().apply();
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("userToken",token);
+        editor.apply();
     }
 
     public void removeUser(){
-        sharedPreferences.edit().clear().commit();
-        sharedPreferences.edit().apply();
+//        sharedPreferences.edit().clear().commit();
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove("userToken");
+        editor.apply();
     }
 
 }

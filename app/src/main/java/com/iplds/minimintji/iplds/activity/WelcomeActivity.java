@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.os.Handler;
 
 import com.iplds.minimintji.iplds.R;
+import com.iplds.minimintji.iplds.manager.SessionManager;
 
 public class WelcomeActivity extends Activity {
     private static int SPLASH_TIME_OUT = 3000; // 3s
