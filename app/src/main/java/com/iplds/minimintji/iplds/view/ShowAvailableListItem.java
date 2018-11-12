@@ -17,7 +17,7 @@ import com.iplds.minimintji.iplds.manager.ChangeFloorIdToFloorName;
  */
 public class ShowAvailableListItem extends BaseCustomViewGroup{
 
-    TextView Floor,Available;
+    TextView Floor,Available,Use;
 
     public ShowAvailableListItem(Context context) {
         super(context);
@@ -55,6 +55,7 @@ public class ShowAvailableListItem extends BaseCustomViewGroup{
         // findViewById here
         Floor = (TextView) findViewById(R.id.Floor);
         Available = (TextView) findViewById(R.id.Available);
+        Use = (TextView) findViewById(R.id.Use);
     }
 
     private void initWithAttrs(AttributeSet attrs, int defStyleAttr, int defStyleRes) {
@@ -100,5 +101,9 @@ public class ShowAvailableListItem extends BaseCustomViewGroup{
 
     public void setAvailable(int available) {
         Available.setText(""+available);
+    }
+
+    public void setUnavailable(int use){
+        Use.setText(""+use);
     }
 }

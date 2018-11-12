@@ -30,23 +30,26 @@
         <item name="android:textSize">16sp</item>
     </style>
 
+    <style name="available_text" parent="header_font_size_title">
+        <item name="android:textColor">@color/pdlg_color_green</item>
+    </style>
+
+    <style name="unavailable_text" parent="header_font_size_title">
+        <item name="android:textColor">@color/pdlg_color_red</item>
+    </style>
+
     <style name="mess_time_martop">
         <item name="android:layout_marginTop">7dp</item>
         <item name="android:textSize">13.5sp</item>
         <item name="android:textColor">#666666</item>
     </style>
 
-    <style name="title_bar_status">
+    <style name="title_bar">
         <item name="android:textColor">@color/pdlg_color_white</item>
         <item name="android:textSize">18sp</item>
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="bar_status">
-        <item name="android:textColor">@color/pdlg_color_white</item>
-        <item name="android:textSize">18sp</item>
-        <item name="android:textStyle">bold</item>
-    </style>
 
     <style name="ToolbarColoredBackArrow" parent="AppTheme">
         <item name="android:textColorSecondary">@color/colorAccent</item>

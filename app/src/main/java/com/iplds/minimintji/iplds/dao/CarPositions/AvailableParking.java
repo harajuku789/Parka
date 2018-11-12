@@ -4,7 +4,12 @@ import com.google.gson.annotations.SerializedName;
 
 public class AvailableParking {
     @SerializedName("available_parking")        int availableParking;
+    @SerializedName("use")                      int use;
     @SerializedName("floor_id")                 int floorId;
+
+    public int getUse() {
+        return use;
+    }
 
     public int getAvailableParking() {
         return availableParking;

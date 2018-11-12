@@ -49,8 +49,13 @@ public class AvailableParkingListAdapter extends BaseAdapter{
         ShowAvailableListItem view = (ShowAvailableListItem) convertView;
         AvailableParking availables = (AvailableParking) getItem(position);
 
+        view.setUnavailable(availables.getUse());
         view.setFloor(availables.getFloorId());
         view.setAvailable(availables.getAvailableParking());
+
+        Log.d("TESTLOG","testtttt getFloorId: "+availables.getFloorId());
+        Log.d("TESTLOG","testtttt getAvailableParking: "+availables.getAvailableParking());
+        Log.d("TESTLOG","testtttt getUse: "+availables.getUse());
 
         return view;
 

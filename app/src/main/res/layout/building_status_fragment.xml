@@ -52,14 +52,9 @@
                 android:id="@+id/swipe_refresh_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-                <ListView
-                    android:id="@+id/listView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"
-                    android:dividerHeight="10dp"
-                    android:divider="@null"></ListView>
+
+                <include layout="@layout/zone_status"/>
+
             </android.support.v4.widget.SwipeRefreshLayout>
         </LinearLayout>
 
