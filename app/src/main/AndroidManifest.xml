@@ -12,8 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.MainActivity">
-        </activity>
+        <activity android:name=".activity.MainActivity"></activity>
         <activity
             android:name=".activity.RegisterActivity"
             android:parentActivityName=".activity.MainActivity"
@@ -24,19 +23,26 @@
         <activity
             android:name=".activity.HelpActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".activity.WelcomeActivity"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:label="@string/title_activity_welcome"
             android:noHistory="true"
             android:screenOrientation="portrait"
-            android:label="@string/title_activity_welcome">
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service android:name=".MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <activity android:name=".activity.CheckIsDriveOutActivity"></activity>
     </application>
 
 </manifest>

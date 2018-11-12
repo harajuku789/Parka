@@ -11,6 +11,7 @@ import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+import com.iplds.minimintji.iplds.activity.CheckIsDriveOutActivity;
 import com.iplds.minimintji.iplds.fragment.ShowStatusFragment;
 
 import java.util.Date;
@@ -77,7 +78,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                     PendingIntent intent = PendingIntent.getActivity(getBaseContext(),0,notificationIntent,0);
 
                     b.setSmallIcon(R.mipmap.ic_launcher_round)
-                            .setContentTitle("IndoorApp")
+                            .setContentTitle("Parka Test")
                             .setContentText(s)
                             .setContentIntent(intent);
 
@@ -91,13 +92,19 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
             String sn = remoteMessage.getNotification().getBody();
 
-
-            NotificationCompat.Builder b = new NotificationCompat.Builder(this, CH1);
-            b.setSmallIcon(R.mipmap.ic_launcher_round)
-                    .setContentTitle("IndoorApp")
-                    .setContentText(sn);
-
             NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            NotificationCompat.Builder b = new NotificationCompat.Builder(this, CH1);
+            Intent notificationIntent = new Intent(getBaseContext(), CheckIsDriveOutActivity.class);
+
+            notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            PendingIntent intent = PendingIntent.getActivity(getBaseContext(),0,notificationIntent,0);
+
+            b.setSmallIcon(R.mipmap.ic_launcher_round)
+                    .setContentTitle("Parka Test")
+                    .setContentText(sn)
+                    .setContentIntent(intent);;
+
+
             nm.notify(idNotiPayload, b.build());
 
         }
