@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.iplds.minimintji.iplds.R;
 import com.iplds.minimintji.iplds.manager.ChangeFloorIdToFloorName;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
@@ -98,7 +99,7 @@ public class CarPositionHistoryListItem extends BaseCustomViewGroup{
         // Restore State from bundle here
     }
 
-    public void setTvPosition(String positionId) {
+    public void setTvPosition(int positionId) {
         tvPosition.setText(""+positionId);
     }
 
@@ -112,6 +113,16 @@ public class CarPositionHistoryListItem extends BaseCustomViewGroup{
 
     public void setTvBuilding(String buildingName){
         tvBuilding.setText(""+buildingName);
+    }
+
+    public void setTvStartTime(String startTime){
+//        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:MM:SS");
+        tvStartTime.setText(""+startTime);
+    }
+
+    public void setTvEndTime(String endTime){
+//        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:MM:SS");
+        tvEndTime.setText(""+endTime);
     }
 
 }

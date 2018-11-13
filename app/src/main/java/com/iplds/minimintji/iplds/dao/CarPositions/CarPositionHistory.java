@@ -13,8 +13,8 @@ public class CarPositionHistory {
     @SerializedName("position_name")        String positionName;
     @SerializedName("user_id")              int userId;
     @SerializedName("is_driveOut")          boolean isDriveOut;
-    @SerializedName("time_created")         Date timeCreated;
-    @SerializedName("time_driveout")        Date timeDriveOut;
+    @SerializedName("time_created")         String timeCreated;
+    @SerializedName("time_driveout")        String timeDriveOut;
 
     public int getCarId() {
         return carId;
@@ -80,19 +80,19 @@ public class CarPositionHistory {
         isDriveOut = driveOut;
     }
 
-    public Date getTimeCreated() {
+    public String getTimeCreated() {
         return timeCreated;
     }
 
-    public void setTimeCreated(Date timeCreated) {
+    public void setTimeCreated(String timeCreated) {
         this.timeCreated = timeCreated;
     }
 
-    public Date getTimeDriveOut() {
+    public String getTimeDriveOut() {
         return timeDriveOut;
     }
 
-    public void setTimeDriveOut(Date timeDriveOut) {
+    public void setTimeDriveOut(String timeDriveOut) {
         this.timeDriveOut = timeDriveOut;
     }
 }

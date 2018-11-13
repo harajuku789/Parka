@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,6 +40,8 @@ public class CarPositionHistoryActivity extends AppCompatActivity {
     private ListView listView;
     private CarPositionHistoryListAdapter listAdapter;
     private SwipeRefreshLayout swipLayout;
+    private TextView tvName, tvLastname;
+    LinearLayout layoutUserInfo;
     private SessionManager sessionManager;
     private String userToken;
 
@@ -61,10 +64,27 @@ public class CarPositionHistoryActivity extends AppCompatActivity {
         listAdapter = new CarPositionHistoryListAdapter();
         listView.setAdapter(listAdapter);
 
-        sessionManager = new SessionManager(getBaseContext());
-        userToken = sessionManager.getToken();
-        Log.d("TOken", "User TOken is :" + userToken);
+        layoutUserInfo = (LinearLayout) findViewById(R.id.layoutUserInfo);
+        tvName = (TextView) findViewById(R.id.layoutUserInfo).findViewById(R.id.tvName);
+        tvLastname = (TextView) findViewById(R.id.layoutUserInfo).findViewById(R.id.tvLastname);
 
+        sessionManager = new SessionManager(CarPositionHistoryActivity.this);
+        userToken = sessionManager.getToken();
+        Log.d("TOken from CPHActivity", "User TOken is :" + userToken);
+        getUserInfo(userToken);
+
+        getCarPositionHistory();
+
+        swipLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getCarPositionHistory();
+                swipLayout.setRefreshing(false);
+            }
+        });
+    }
+
+    private void getCarPositionHistory() {
         Call<CarPositionHistoryCollection> call = HttpManager.getInstance()
                 .getService()
                 .getCarPositionHistory(userToken);
@@ -90,5 +110,31 @@ public class CarPositionHistoryActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
+    }
+
+    private void getUserInfo(String userToken) {
+        Call<User> call = HttpManager.getInstance()
+                .getService()
+                .getUserInfo(userToken);
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                User userInfo = response.body();
+                Log.d("UserInfo", "------------ UserInfo" + userInfo);
+                if (response.isSuccessful() && userInfo != null) {
+                    // ----- waiting for fragment -----
+                    //tvName.setText(userInfo.getName());
+                    //tvSurname.setText(userInfo.getSurname());
+
+                    tvName.setText(userInfo.getName());
+                    tvLastname.setText(userInfo.getSurname());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Toast.makeText(CarPositionHistoryActivity.this, "Error: " + String.valueOf(t.getMessage()), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }

@@ -7,7 +7,7 @@ import java.util.List;
 public class CarPositionHistoryCollection {
     @SerializedName("status_code")      int statusCode;
     @SerializedName("message")          String message;
-    @SerializedName("carPosition")           List<CarPositionHistory> carPosition;
+    @SerializedName("carPosition")      List<CarPositionHistory> carPosition;
 
     public int getStatusCode() {
         return statusCode;
