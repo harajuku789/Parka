@@ -88,7 +88,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         String userToken = prefs.getString("UserToken", null);
         */
 
-        userToken = getIntent().getExtras().getString("userToken");
+        sessionManager = new SessionManager(getBaseContext());
+        userToken = sessionManager.getToken();
+//        userToken = getIntent().getExtras().getString("userToken");
         Log.d("TOken", "User TOken is :" + userToken);
 
         getUserInfo(userToken);

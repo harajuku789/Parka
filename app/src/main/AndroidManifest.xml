@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.MainActivity"></activity>
+        <activity android:name=".activity.MainActivity" />
         <activity
             android:name=".activity.RegisterActivity"
             android:parentActivityName=".activity.MainActivity"
@@ -42,7 +42,12 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".activity.CheckIsDriveOutActivity"></activity>
+        <activity
+            android:name=".activity.CheckIsDriveOutActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".activity.CarPositionHistoryActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

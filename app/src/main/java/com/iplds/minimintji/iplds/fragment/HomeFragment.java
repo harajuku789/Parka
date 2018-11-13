@@ -1,5 +1,6 @@
 package com.iplds.minimintji.iplds.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -19,6 +20,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 import com.iplds.minimintji.iplds.R;
+import com.iplds.minimintji.iplds.activity.CarPositionHistoryActivity;
 import com.iplds.minimintji.iplds.activity.HomeActivity;
 import com.iplds.minimintji.iplds.dao.CarPositions.CarPositionCollection;
 import com.iplds.minimintji.iplds.dao.CarPositions.CarPositions;
@@ -94,52 +96,54 @@ public class HomeFragment extends Fragment {
         btnShowMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ivCar.setVisibility(View.GONE);
-                tvNoParking.setVisibility(View.GONE);
-                progressBar.setVisibility(View.VISIBLE);
-                btnShowMore.setVisibility(View.GONE);
-
-                Call<CarPositionCollection> call = HttpManager.getInstance()
-                        .getService()
-                        .sendXYPosition(userToken,
-                                5.8,
-                                11,
-                                5018,
-                                fcmToken,
-                                1541796327);
-
-                call.enqueue(new Callback<CarPositionCollection>() {
-                    @Override
-                    public void onResponse(Call<CarPositionCollection> call, Response<CarPositionCollection> response) {
-                        progressBar.setVisibility(View.GONE);
-                        layoutCurrentMessage.setVisibility(View.VISIBLE);
-
-                        if (response.isSuccessful()){
-                            CarPositionCollection dao = response.body();
-                            if (dao.getCarPositions() != null){
-                                CarPositions car = (CarPositions) dao.getCarPositions();
-
-                                String message = car.getBuildingName()+" "+car.getFloorName()+" "
-                                        +car.getZoneName()+" "+car.getPositionName()+" "+
-                                        car.getTimeCreated();
-
-                                tvPosition.setText(car.getPositionName());
-                                tvZone.setText(car.getZoneName());
-                                tvFloor.setText(car.getFloorName());
-                                tvBuilding.setText(car.getBuildingName());
-//                                tvStartTime.setText((int) car.getTimeCreated());
-
-                                Toast.makeText(getContext(),message,Toast.LENGTH_LONG).show();
-                                Log.d("message from server","-------- message is: "+message);
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<CarPositionCollection> call, Throwable t) {
-                        Toast.makeText(getContext(), "Error: "+String.valueOf(t.getMessage()),Toast.LENGTH_LONG).show();
-                    }
-                });
+                Intent intent = new Intent(getContext(), CarPositionHistoryActivity.class);
+                startActivity(intent);
+//                ivCar.setVisibility(View.GONE);
+//                tvNoParking.setVisibility(View.GONE);
+//                progressBar.setVisibility(View.VISIBLE);
+//                btnShowMore.setVisibility(View.GONE);
+//
+//                Call<CarPositionCollection> call = HttpManager.getInstance()
+//                        .getService()
+//                        .sendXYPosition(userToken,
+//                                5.8,
+//                                11,
+//                                5018,
+//                                fcmToken,
+//                                1541796327);
+//
+//                call.enqueue(new Callback<CarPositionCollection>() {
+//                    @Override
+//                    public void onResponse(Call<CarPositionCollection> call, Response<CarPositionCollection> response) {
+//                        progressBar.setVisibility(View.GONE);
+//                        layoutCurrentMessage.setVisibility(View.VISIBLE);
+//
+//                        if (response.isSuccessful()){
+//                            CarPositionCollection dao = response.body();
+//                            if (dao.getCarPositions() != null){
+//                                CarPositions car = (CarPositions) dao.getCarPositions();
+//
+//                                String message = car.getBuildingName()+" "+car.getFloorName()+" "
+//                                        +car.getZoneName()+" "+car.getPositionName()+" "+
+//                                        car.getTimeCreated();
+//
+//                                tvPosition.setText(car.getPositionName());
+//                                tvZone.setText(car.getZoneName());
+//                                tvFloor.setText(car.getFloorName());
+//                                tvBuilding.setText(car.getBuildingName());
+////                                tvStartTime.setText((int) car.getTimeCreated());
+//
+//                                Toast.makeText(getContext(),message,Toast.LENGTH_LONG).show();
+//                                Log.d("message from server","-------- message is: "+message);
+//                            }
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<CarPositionCollection> call, Throwable t) {
+//                        Toast.makeText(getContext(), "Error: "+String.valueOf(t.getMessage()),Toast.LENGTH_LONG).show();
+//                    }
+//                });
             }
         });
 

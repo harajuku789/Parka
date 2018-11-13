@@ -2,6 +2,7 @@ package com.iplds.minimintji.iplds.manager.http;
 
 import com.iplds.minimintji.iplds.dao.CarPositions.AvailableParkingCollection;
 import com.iplds.minimintji.iplds.dao.CarPositions.CarPositionCollection;
+import com.iplds.minimintji.iplds.dao.CarPositions.CarPositionHistoryCollection;
 import com.iplds.minimintji.iplds.dao.Token;
 import com.iplds.minimintji.iplds.dao.User;
 
@@ -43,8 +44,11 @@ public interface ApiService {
                                                @Field("fcm_token") String fcmToken,
                                                @Field("timestamp_stop_engine") long time);
 
-    @GET("users/showparking/")
+    @GET("users/showparkingposition/")
     Call<AvailableParkingCollection> getAvailableParking();
+
+    @GET("users/{token}/carPositions/")
+    Call<CarPositionHistoryCollection> getCarPositionHistory(@Path("token") String token);
 }
 
 
