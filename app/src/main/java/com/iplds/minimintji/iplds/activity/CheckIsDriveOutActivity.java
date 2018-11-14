@@ -1,11 +1,15 @@
 package com.iplds.minimintji.iplds.activity;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -31,57 +35,50 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CheckIsDriveOutActivity extends AppCompatActivity{
+public class CheckIsDriveOutActivity extends AppCompatActivity {
 
+    Button btnNo, btnYes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_check_is_drive_out);
+        setContentView(R.layout.check_drive_out);
 
-        CreateDialog();
+        initInstance();
     }
 
-    public void CreateDialog() {
-        final  PrettyDialog pDialog = new PrettyDialog(this);
-        pDialog.setTitle("Do you want to sign out?")
-                //.setMessage("555555")
-                .addButton(
-                        "Yes",     // button text
-                        R.color.pdlg_color_white,  // button text color
-                        R.color.colorAccent,  // button background color
-                        new PrettyDialogCallback() {  // button OnClick listener
-                            @Override
-                            public void onClick() {
-                                // Do what you gotta do
-//                                final SharedPreferences prefs = getBaseContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+    private void initInstance() {
+        btnNo = (Button) findViewById(R.id.btnNo);
+        btnYes = (Button) findViewById(R.id.btnYes);
 
-                                //------------------
-//                                new SessionManager(HomeActivity.this).removeUser();
-//                                Toast.makeText(HomeActivity.this, "Token : "+ userToken,Toast.LENGTH_SHORT).show();
+        btnNo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_CALL);
+                intent.setData(Uri.parse("tel:0882497718"));
+                if (ActivityCompat.checkSelfPermission(CheckIsDriveOutActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                    // TODO: Consider calling
+                    //    ActivityCompat#requestPermissions
+                    // here to request the missing permissions, and then overriding
+                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                    //                                          int[] grantResults)
+                    // to handle the case where the user grants the permission. See the documentation
+                    // for ActivityCompat#requestPermissions for more details.
+                    return;
+                }
+                startActivity(intent);
+            }
+        });
 
-                                //------------------
-//                                sessionManager = new SessionManager(HomeActivity.this);
-//                                sessionManager.removeUser();
-
-                            }
-                        }
-                )
-
-                .addButton(
-                        "Cancel",
-                        R.color.pdlg_color_white,
-                        R.color.pdlg_color_red,
-                        new PrettyDialogCallback() {
-                            @Override
-                            public void onClick() {
-                                pDialog.dismiss();
-                            }
-                        }
-                )
-
-                .setIcon(R.drawable.exclamation_mark_512)
-
-                .show();
+        btnYes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CheckIsDriveOutActivity.this, CarPositionHistoryActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
+
+
 }

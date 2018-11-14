@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.app.Activity;
 import android.os.Handler;
-import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.iplds.minimintji.iplds.R;
@@ -16,53 +15,37 @@ public class WelcomeActivity extends Activity {
     private static int SPLASH_TIME_OUT = 3000; // 3s
 
     @Override
-    protected void onNewIntent(Intent intent) {
-        Bundle extras = intent.getExtras();
-        Log.d("Test Bundle","Bunddle String: "+extras);
-        if (extras != null){
-            String check = extras.getString("check");
-            Log.d("Test Bundle","String check: "+check);
-            if (check != null){
-                Intent anotherIntent = new Intent(this, CheckIsDriveOutActivity.class);
-                startActivity(anotherIntent);
-            }
-        }
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
 
         final SessionManager sessionManager = new SessionManager(WelcomeActivity.this);
 
-//        Bundle extras = getIntent().getExtras();
-//        Log.d("Test Bundle","Bunddle String: "+extras);
-//        String check = extras.getString("check");
-//        Log.d("Test Bundle","String check: "+check);
-//        if (check != null){
-//            Intent anotherIntent = new Intent(this, CheckIsDriveOutActivity.class);
-//            startActivity(anotherIntent);
-//        }
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 SharedPreferences prefs = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
-                String token = prefs.getString("userToken",null);
-                Log.d("TEST TAG","token user: "+token);
+                String token = prefs.getString("userToken", null);
 
                 Bundle extras = getIntent().getExtras();
-                Log.d("Test Bundle","Bunddle String: "+extras);
-                if (token != null && extras != null) {
-                    Intent anotherIntent = new Intent(WelcomeActivity.this, CheckIsDriveOutActivity.class);
-                    startActivity(anotherIntent);
-                }else if (token != null){
-                    Intent welcomeIntent1 = new Intent(WelcomeActivity.this, HomeActivity.class);
-                    welcomeIntent1.putExtra("userToken", sessionManager.getToken());
-                    startActivity(welcomeIntent1);
-                    finish();
-                }else{
+                String test = null;
+                if (extras != null) {
+                    test = getIntent().getExtras().getString("test");
+                }
+
+                if (token != null) {
+                    if (test != null) {
+                        Intent anotherIntent = new Intent(WelcomeActivity.this, CheckIsDriveOutActivity.class);
+                        startActivity(anotherIntent);
+                        finish();
+                    } else {
+                        Intent welcomeIntent1 = new Intent(WelcomeActivity.this, HomeActivity.class);
+                        welcomeIntent1.putExtra("userToken", sessionManager.getToken());
+                        startActivity(welcomeIntent1);
+                        finish();
+                    }
+                } else {
                     Intent welcomeIntent2 = new Intent(WelcomeActivity.this, MainActivity.class);
                     startActivity(welcomeIntent2);
                     finish();
@@ -71,13 +54,6 @@ public class WelcomeActivity extends Activity {
             }
         }, SPLASH_TIME_OUT);
 
-
-    }
-
-
-    private void openAnotherActivity() {
-        Intent intent = new Intent(WelcomeActivity.this, CheckIsDriveOutActivity.class);
-        startActivity(intent);
     }
 
 }

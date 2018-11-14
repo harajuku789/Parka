@@ -49,6 +49,9 @@ public interface ApiService {
 
     @GET("users/{token}/carPositions/")
     Call<CarPositionHistoryCollection> getCarPositionHistory(@Path("token") String token);
+
+    @GET("users/checkstatuscurrent/{token}/")
+    Call<CarPositionHistoryCollection> getCurrentPosition(@Path("token") String token);
 }
 
 
