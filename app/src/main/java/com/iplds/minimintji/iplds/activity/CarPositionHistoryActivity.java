@@ -16,8 +16,10 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,10 +42,12 @@ public class CarPositionHistoryActivity extends AppCompatActivity {
     private ListView listView;
     private CarPositionHistoryListAdapter listAdapter;
     private SwipeRefreshLayout swipLayout;
-    private TextView tvName, tvLastname;
-    LinearLayout layoutUserInfo;
+    private TextView tvName, tvLastname, tvNoparking;
+//    LinearLayout layoutUserInfo;
     private SessionManager sessionManager;
     private String userToken;
+    private ProgressBar progressBar;
+    private ImageView ivCar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,19 +63,27 @@ public class CarPositionHistoryActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        ivCar = (ImageView) findViewById(R.id.ivCar);
+        tvNoparking = (TextView) findViewById(R.id.tvNoParking);
+        progressBar.setVisibility(View.VISIBLE);
+        ivCar.setVisibility(View.GONE);
+        tvNoparking.setVisibility(View.GONE);
+
         listView = (ListView) findViewById(R.id.listView);
+        listView.setVisibility(View.GONE);
         swipLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
         listAdapter = new CarPositionHistoryListAdapter();
         listView.setAdapter(listAdapter);
 
-        layoutUserInfo = (LinearLayout) findViewById(R.id.layoutUserInfo);
-        tvName = (TextView) findViewById(R.id.layoutUserInfo).findViewById(R.id.tvName);
-        tvLastname = (TextView) findViewById(R.id.layoutUserInfo).findViewById(R.id.tvLastname);
+//        layoutUserInfo = (LinearLayout) findViewById(R.id.layoutUserInfo);
+//        tvName = (TextView) findViewById(R.id.layoutUserInfo).findViewById(R.id.tvName);
+//        tvLastname = (TextView) findViewById(R.id.layoutUserInfo).findViewById(R.id.tvLastname);
 
         sessionManager = new SessionManager(CarPositionHistoryActivity.this);
         userToken = sessionManager.getToken();
         Log.d("TOken from CPHActivity", "User TOken is :" + userToken);
-        getUserInfo(userToken);
+//        getUserInfo(userToken);
 
         getCarPositionHistory();
 
@@ -91,11 +103,20 @@ public class CarPositionHistoryActivity extends AppCompatActivity {
         call.enqueue(new Callback<CarPositionHistoryCollection>() {
             @Override
             public void onResponse(Call<CarPositionHistoryCollection> call, Response<CarPositionHistoryCollection> response) {
+                progressBar.setVisibility(View.GONE);
+                listView.setVisibility(View.VISIBLE);
                 if (response.isSuccessful()){
                     CarPositionHistoryCollection dao = response.body();
                     Log.d("DAO", "DAO is :" + dao);
-                    listAdapter.setDao(dao);
-                    listAdapter.notifyDataSetChanged();
+                    if (dao.getCarPosition() != null){
+                        listAdapter.setDao(dao);
+                        listAdapter.notifyDataSetChanged();
+                    } else {
+                        listView.setVisibility(View.GONE);
+                        ivCar.setVisibility(View.VISIBLE);
+                        tvNoparking.setVisibility(View.VISIBLE);
+                    }
+
                 }
             }
 
@@ -126,8 +147,6 @@ public class CarPositionHistoryActivity extends AppCompatActivity {
                     //tvName.setText(userInfo.getName());
                     //tvSurname.setText(userInfo.getSurname());
 
-                    tvName.setText(userInfo.getName());
-                    tvLastname.setText(userInfo.getSurname());
                 }
             }
 

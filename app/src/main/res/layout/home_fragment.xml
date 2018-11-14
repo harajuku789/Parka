@@ -42,15 +42,36 @@
 
         <include android:id="@+id/layoutCurrentMessage" layout="@layout/message_home"/>
 
-        <Button
-            android:id="@+id/btnShowMore"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/tvNoParking"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_buttom_field"
-            android:background="@drawable/bg_radius_btn"
-            android:text="Parking" />
+            android:orientation="horizontal"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="40dp"
+            >
+            <Button
+                android:id="@+id/btnParking"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_buttom_field"
+                android:background="@drawable/bg_radius_btn"
+                android:text="Parking"
+                android:layout_marginLeft="10dp"
+                android:layout_alignParentLeft="true"
+                />
+
+            <Button
+                android:id="@+id/btnHistory"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_buttom_field"
+                android:background="@drawable/bg_radius_btn"
+                android:text="History"
+                android:layout_marginRight="10dp"
+                android:layout_alignParentRight="true"
+
+                />
+        </RelativeLayout>
 
     </RelativeLayout>
 

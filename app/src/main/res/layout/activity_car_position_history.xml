@@ -19,7 +19,41 @@
             android:id="@+id/toolbarHelp"
             layout="@layout/toolbar" />
 
-        <include android:id="@+id/layoutUserInfo" layout="@layout/user_info" />
+        <TextView
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:text="HISTORY"
+            android:textSize="20sp"
+            style="@style/header_font_size_title2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <ProgressBar
+            android:gravity="center"
+            android:id="@+id/progressBar"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_centerInParent="true"
+            android:progressBackgroundTint="@color/colorPrimary" />
+
+        <ImageView
+            android:gravity="center"
+            android:id="@+id/ivCar"
+            android:layout_centerInParent="true"
+            android:layout_width="@dimen/img_size_noparking"
+            android:layout_height="@dimen/img_size_noparking"
+            android:src="@drawable/car" />
+
+        <TextView
+            android:gravity="center"
+            android:id="@+id/tvNoParking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padd_field"
+            android:layout_below="@+id/ivCar"
+            android:layout_centerInParent="true"
+            android:text="No Parking"
+            style="@style/header_font_size_title3"/>
 
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/swipe_refresh_layout"
