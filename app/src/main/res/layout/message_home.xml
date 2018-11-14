@@ -7,7 +7,7 @@
     android:background="@drawable/message_box"
     android:orientation="vertical"
     android:padding="@dimen/mess_box_padding"
-    android:layout_centerInParent="true">
+    >
 
     <LinearLayout
         android:layout_width="match_parent"

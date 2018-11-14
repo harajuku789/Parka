@@ -44,7 +44,7 @@ public class CarPositionHistoryListAdapter extends BaseAdapter{
         CarPositionHistoryListItem view = (CarPositionHistoryListItem) convertView;
         CarPositionHistory history = (CarPositionHistory) getItem(position);
 
-        view.setTvPosition(history.getCarId());
+        view.setTvPosition(history.getPositionName());
         view.setTvZone(history.getZoneName());
         view.setTvFloor(history.getFloorName());
         view.setTvBuilding(history.getBuildingName());
@@ -55,6 +55,11 @@ public class CarPositionHistoryListAdapter extends BaseAdapter{
         Log.d("TESTLOG","testtttt getPositionName: "+history.getPositionName());
         Log.d("TESTLOG","testtttt getFloorName: "+history.getFloorName());
         Log.d("TESTLOG","testtttt getBuildingName: "+history.getBuildingName());
+        Log.d("TESTLOG","testtttt getTimeCreated: "+history.getTimeCreated());
+        Log.d("TESTLOG","testtttt getTimeCreated type: "+history.getTimeCreated().getClass().getName());
+        Log.d("TESTLOG","testtttt getTimeDriveOut: "+history.getTimeDriveOut());
+        Log.d("TESTLOG","testtttt getTimeDriveOut type: "+history.getTimeDriveOut().getClass().getName());
+
 
         return view;
     }

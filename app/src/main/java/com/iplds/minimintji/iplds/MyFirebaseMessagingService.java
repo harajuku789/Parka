@@ -1,17 +1,22 @@
 package com.iplds.minimintji.iplds;
 
+import android.annotation.SuppressLint;
+import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.iplds.minimintji.iplds.activity.CheckIsDriveOutActivity;
+import com.iplds.minimintji.iplds.activity.WelcomeActivity;
 import com.iplds.minimintji.iplds.fragment.ShowStatusFragment;
 
 import java.util.Date;
@@ -92,20 +97,62 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
             String sn = remoteMessage.getNotification().getBody();
 
-            NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-            NotificationCompat.Builder b = new NotificationCompat.Builder(this, CH1);
-            Intent notificationIntent = new Intent(getBaseContext(), CheckIsDriveOutActivity.class);
+            Intent resultIntent = new Intent(this,WelcomeActivity.class);
+            resultIntent.putExtra("test","test");
+            TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+            stackBuilder.addNextIntentWithParentStack(resultIntent);
 
-            notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            PendingIntent intent = PendingIntent.getActivity(getBaseContext(),0,notificationIntent,0);
+            PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0,PendingIntent.FLAG_UPDATE_CURRENT);
 
-            b.setSmallIcon(R.mipmap.ic_launcher_round)
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(this,CH1);
+            builder.setSmallIcon(R.mipmap.ic_launcher_round)
+                    .setContentIntent(resultPendingIntent)
                     .setContentTitle("Parka Test")
                     .setContentText(sn)
-                    .setContentIntent(intent);;
+                    .setAutoCancel(true)
+                    .setDefaults(Notification.DEFAULT_SOUND);
 
+            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+            notificationManager.notify(idNotiPayload, builder.build());
+//            ============================================================================================
+//            NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+//            NotificationCompat.Builder b = new NotificationCompat.Builder(this, CH1);
+//            Intent notificationIntent = new Intent(getApplicationContext(), CheckIsDriveOutActivity.class);
+//
+//            TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+//            stackBuilder.addNextIntentWithParentStack(notificationIntent);
+//            PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+////            notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+////            PendingIntent intent = PendingIntent.getActivity(getBaseContext(),0,notificationIntent,0);
+//
+//            b.setSmallIcon(R.mipmap.ic_launcher_round)
+//                    .setContentTitle("Parka Test")
+//                    .setContentText(sn)
+//                    .setContentIntent(resultPendingIntent);;
+//
+//
+//            nm.notify(idNotiPayload, b.build());
 
-            nm.notify(idNotiPayload, b.build());
+//            ============================================================================================
+//            Intent myIntent = new Intent(getApplicationContext(),CheckIsDriveOutActivity.class);
+//            @SuppressLint("WrongConstant") PendingIntent pendingIntent = PendingIntent.getActivity(
+//                    getApplicationContext(),
+//                    0,
+//                    myIntent,
+//                    Intent.FLAG_ACTIVITY_NEW_TASK);
+//
+//            Notification myNotification = new NotificationCompat.Builder(getApplicationContext())
+//                    .setContentTitle("Parka Test")
+//                    .setContentText(sn)
+//                    .setTicker("Notification!")
+//                    .setContentIntent(pendingIntent)
+//                    .setDefaults(Notification.DEFAULT_SOUND)
+//                    .setAutoCancel(true)
+//                    .setSmallIcon(R.mipmap.ic_launcher_round)
+//                    .build();
+//
+//            NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+//            nm.notify(idNotiPayload,myNotification);
 
         }
     }

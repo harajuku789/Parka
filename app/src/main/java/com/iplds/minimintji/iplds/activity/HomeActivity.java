@@ -1,6 +1,8 @@
 package com.iplds.minimintji.iplds.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -217,15 +219,19 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                             @Override
                             public void onClick() {
                                 // Do what you gotta do
-                                //final SharedPreferences prefs = getBaseContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+//                                final SharedPreferences prefs = getBaseContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
 
                                 //------------------
 //                                new SessionManager(HomeActivity.this).removeUser();
 //                                Toast.makeText(HomeActivity.this, "Token : "+ userToken,Toast.LENGTH_SHORT).show();
 
                                 //------------------
-                                sessionManager = new SessionManager(HomeActivity.this);
-                                sessionManager.removeUser();
+//                                sessionManager = new SessionManager(HomeActivity.this);
+//                                sessionManager.removeUser();
+                                SharedPreferences prefs = getSharedPreferences("userInfo",Context.MODE_PRIVATE);
+                                SharedPreferences.Editor edit= prefs.edit();
+                                edit.remove("userToken");
+                                edit.apply();
 
                                 Intent intent = new Intent(HomeActivity.this, MainActivity.class);
                                 startActivity(intent);

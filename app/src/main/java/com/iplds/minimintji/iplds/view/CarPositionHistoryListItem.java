@@ -5,13 +5,17 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.iplds.minimintji.iplds.R;
 import com.iplds.minimintji.iplds.manager.ChangeFloorIdToFloorName;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 
 
 /**
@@ -99,8 +103,8 @@ public class CarPositionHistoryListItem extends BaseCustomViewGroup{
         // Restore State from bundle here
     }
 
-    public void setTvPosition(int positionId) {
-        tvPosition.setText(""+positionId);
+    public void setTvPosition(String positionName) {
+        tvPosition.setText(""+positionName);
     }
 
     public void setTvZone(String zoneName) {
@@ -116,13 +120,28 @@ public class CarPositionHistoryListItem extends BaseCustomViewGroup{
     }
 
     public void setTvStartTime(String startTime){
-//        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:MM:SS");
-        tvStartTime.setText(""+startTime);
+        //        TODO: solve this ploblem dateformat
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:MM:SS");
+        try {
+            Date date = formatter.parse(startTime);
+            Log.d("Timeeeeeeeee","datetime: "+date);
+            tvStartTime.setText(startTime);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public void setTvEndTime(String endTime){
-//        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:MM:SS");
-        tvEndTime.setText(""+endTime);
+//        TODO: solve this ploblem dateformat
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:MM:SS");
+        try {
+            Date date = formatter.parse(endTime);
+            Log.d("Timeeeeeeeee","datetime: "+date);
+            tvStartTime.setText(endTime);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
 }
