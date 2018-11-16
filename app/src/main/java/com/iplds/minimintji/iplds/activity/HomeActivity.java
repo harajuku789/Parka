@@ -188,6 +188,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()){
+            case R.id.nav_testing:
+                startActivity(new Intent(HomeActivity.this, TestActivity.class));
+                break;
+
             case R.id.nav_help:
                 startActivity(new Intent(HomeActivity.this, HelpActivity.class));
                 break;

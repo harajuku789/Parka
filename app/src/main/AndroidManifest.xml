@@ -45,10 +45,12 @@
 
         <activity
             android:name=".activity.CheckIsDriveOutActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.CarPositionHistoryActivity"
             android:parentActivityName=".activity.WelcomeActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activity.TestActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
