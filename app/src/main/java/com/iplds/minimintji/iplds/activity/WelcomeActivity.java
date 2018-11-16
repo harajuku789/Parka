@@ -36,9 +36,11 @@ public class WelcomeActivity extends Activity {
 
                 if (token != null) {
                     if (test != null) {
-                        Intent anotherIntent = new Intent(WelcomeActivity.this, CheckIsDriveOutActivity.class);
-                        startActivity(anotherIntent);
-                        finish();
+                        if (test.equals("test")) {
+                            Intent anotherIntent = new Intent(WelcomeActivity.this, CheckIsDriveOutActivity.class);
+                            startActivity(anotherIntent);
+                            finish();
+                        }
                     } else {
                         Intent welcomeIntent1 = new Intent(WelcomeActivity.this, HomeActivity.class);
                         welcomeIntent1.putExtra("userToken", sessionManager.getToken());

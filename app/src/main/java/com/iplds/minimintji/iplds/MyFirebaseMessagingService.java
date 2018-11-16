@@ -75,24 +75,44 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                     String s = remoteMessage.getData().get(k);
                     Log.d("Data Payload: ", "Message data payload: "+remoteMessage.getData().get(k));
 
-                    Intent resultIntent = new Intent(getApplicationContext(),WelcomeActivity.class);
-                    resultIntent.putExtra("test","test");
-                    resultIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
-                    stackBuilder.addNextIntentWithParentStack(resultIntent);
+                    if (s.equals("You have drive out ?")){
+                        Intent resultIntent = new Intent(getApplicationContext(),WelcomeActivity.class);
+                        resultIntent.putExtra("test","test");
+                        resultIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+                        stackBuilder.addNextIntentWithParentStack(resultIntent);
+                        PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0,PendingIntent.FLAG_UPDATE_CURRENT);
 
-                    PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0,PendingIntent.FLAG_UPDATE_CURRENT);
+                        NotificationCompat.Builder builder = new NotificationCompat.Builder(this,CH1);
+                        builder.setSmallIcon(R.mipmap.ic_launcher_round)
+                                .setContentIntent(resultPendingIntent)
+                                .setContentTitle("Parka Test")
+                                .setContentText(s)
+                                .setAutoCancel(true)
+                                .setDefaults(Notification.DEFAULT_SOUND);
 
-                    NotificationCompat.Builder builder = new NotificationCompat.Builder(this,CH1);
-                    builder.setSmallIcon(R.mipmap.ic_launcher_round)
-                            .setContentIntent(resultPendingIntent)
-                            .setContentTitle("Parka Test")
-                            .setContentText(s)
-                            .setAutoCancel(true)
-                            .setDefaults(Notification.DEFAULT_SOUND);
+                        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+                        notificationManager.notify(idDataPayload, builder.build());
 
-                    NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
-                    notificationManager.notify(idDataPayload, builder.build());
+                    }else{
+                        Intent resultIntent = new Intent(getApplicationContext(),WelcomeActivity.class);
+                        resultIntent.putExtra("test","pass");
+                        resultIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+                        stackBuilder.addNextIntentWithParentStack(resultIntent);
+                        PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0,PendingIntent.FLAG_UPDATE_CURRENT);
+
+                        NotificationCompat.Builder builder = new NotificationCompat.Builder(this,CH1);
+                        builder.setSmallIcon(R.mipmap.ic_launcher_round)
+                                .setContentIntent(resultPendingIntent)
+                                .setContentTitle("Parka Test")
+                                .setContentText(s)
+                                .setAutoCancel(true)
+                                .setDefaults(Notification.DEFAULT_SOUND);
+
+                        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+                        notificationManager.notify(idDataPayload, builder.build());
+                    }
                 }
             }
         }

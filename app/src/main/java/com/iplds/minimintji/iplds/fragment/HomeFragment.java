@@ -24,7 +24,11 @@ import com.iplds.minimintji.iplds.R;
 import com.iplds.minimintji.iplds.activity.CarPositionHistoryActivity;
 import com.iplds.minimintji.iplds.activity.HomeActivity;
 import com.iplds.minimintji.iplds.dao.CarPositions.CarPositionCollection;
+import com.iplds.minimintji.iplds.dao.CarPositions.CarPositionHistory;
+import com.iplds.minimintji.iplds.dao.CarPositions.CarPositionHistoryCollection;
 import com.iplds.minimintji.iplds.dao.CarPositions.CarPositions;
+import com.iplds.minimintji.iplds.dao.CarPositions.CurrentPosition;
+import com.iplds.minimintji.iplds.dao.CarPositions.CurrentPositionCollection;
 import com.iplds.minimintji.iplds.dao.User;
 import com.iplds.minimintji.iplds.manager.HttpManager;
 import com.iplds.minimintji.iplds.manager.SessionManager;
@@ -41,7 +45,8 @@ public class HomeFragment extends Fragment {
 
     ProgressBar progressBar;
     ImageView ivCar;
-    TextView tvNoParking, tvName, tvLastname, tvPosition, tvZone, tvFloor, tvBuilding, tvStartTime;;
+    TextView tvNoParking, tvName, tvLastname, tvPosition, tvZone, tvFloor, tvBuilding, tvStartTime;
+    ;
     Button btnParking, btnHistory;
     private SessionManager sessionManager;
     String userToken, fcmToken;
@@ -80,11 +85,12 @@ public class HomeFragment extends Fragment {
         tvName = (TextView) rootView.findViewById(R.id.layoutUserInfo).findViewById(R.id.tvName);
         tvLastname = (TextView) rootView.findViewById(R.id.layoutUserInfo).findViewById(R.id.tvLastname);
 
+        swipLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_refresh_layout);
         tvPosition = (TextView) rootView.findViewById(R.id.layoutCurrentMessage).findViewById(R.id.tvPosition);
         tvZone = (TextView) rootView.findViewById(R.id.layoutCurrentMessage).findViewById(R.id.tvZone);
         tvFloor = (TextView) rootView.findViewById(R.id.layoutCurrentMessage).findViewById(R.id.tvFloor);
         tvBuilding = (TextView) rootView.findViewById(R.id.layoutCurrentMessage).findViewById(R.id.tvBuilding);
-        tvStartTime = (TextView) rootView.findViewById(R.id.layoutCurrentMessage).findViewById(R.id.tvStartTime);
+        tvStartTime = (TextView) rootView.findViewById(R.id.layoutCurrentMessage).findViewById(R.id.tvStartTimeHere);
 
 //      Hide progressbar and layoutCurrentMessage
         progressBar.setVisibility(View.GONE);
@@ -93,8 +99,21 @@ public class HomeFragment extends Fragment {
 
         sessionManager = new SessionManager(getContext());
         userToken = sessionManager.getToken();
-        Log.d("userToken","------------ user token: "+userToken);
+        Log.d("userToken", "------------ user token: " + userToken);
         getUserInfo(userToken);
+
+        swipLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                ivCar.setVisibility(View.GONE);
+                tvNoParking.setVisibility(View.GONE);
+                progressBar.setVisibility(View.VISIBLE);
+                btnParking.setVisibility(View.GONE);
+                refreshCurrentStatus();
+                Toast.makeText(getContext(), "Test", Toast.LENGTH_LONG).show();
+                swipLayout.setRefreshing(false);
+            }
+        });
 
         btnHistory.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,62 +131,124 @@ public class HomeFragment extends Fragment {
                 progressBar.setVisibility(View.VISIBLE);
                 btnParking.setVisibility(View.GONE);
 
-                long millis = System.currentTimeMillis()/1000L;
+                sendDataToServer();
 
-                Call<CarPositionCollection> call = HttpManager.getInstance()
-                        .getService()
-                        .sendXYPosition(userToken,
-                                5.8,
-                                11,
-                                5018,
-                                fcmToken,
-                                millis);
-
-                call.enqueue(new Callback<CarPositionCollection>() {
-                    @Override
-                    public void onResponse(Call<CarPositionCollection> call, Response<CarPositionCollection> response) {
-                        progressBar.setVisibility(View.GONE);
-                        layoutCurrentMessage.setVisibility(View.VISIBLE);
-                        layoutUserInfo.setVisibility(View.VISIBLE);
-                        if (response.isSuccessful()){
-                            CarPositionCollection dao = response.body();
-                            if (dao.getCarPositions() != null){
-                                CarPositions car = (CarPositions) dao.getCarPositions();
-
-                                if (car.isDriveOut() == false){
-                                    String message = car.getBuildingName()+" "+car.getFloorName()+" "
-                                            +car.getZoneName()+" "+car.getPositionName()+" "+
-                                            car.getTimeCreated();
-
-                                    tvPosition.setText(car.getPositionName());
-                                    tvZone.setText(car.getZoneName());
-                                    tvFloor.setText(car.getFloorName());
-                                    tvBuilding.setText(car.getBuildingName());
-//                                tvStartTime.setText((int) car.getTimeCreated());
-
-                                    Toast.makeText(getContext(),message,Toast.LENGTH_LONG).show();
-                                    Log.d("message from server","-------- message is: "+message);
-                                }
-                            } else {
-                                tvNoParking.setText(dao.getMessage());
-                                layoutCurrentMessage.setVisibility(View.GONE);
-                                ivCar.setVisibility(View.VISIBLE);
-                                tvNoParking.setVisibility(View.VISIBLE);
-                                btnParking.setVisibility(View.VISIBLE);
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<CarPositionCollection> call, Throwable t) {
-                        Toast.makeText(getContext(), "Error: "+String.valueOf(t.getMessage()),Toast.LENGTH_LONG).show();
-                    }
-                });
             }
         });
 
 
     }
+
+//    ------------------------------------ private method ------------------------------------
+
+    private void refreshCurrentStatus() {
+        btnParking.setVisibility(View.VISIBLE);
+        Toast.makeText(getContext(),"fsd;jfksdf;lsdjf;sdjf",Toast.LENGTH_LONG);
+        Log.d("TAG","Pass this line");
+
+        getUserInfo(userToken);
+        Call<CurrentPositionCollection> call = HttpManager.getInstance()
+                .getService()
+                .getCurrentPosition(userToken);
+
+        call.enqueue(new Callback<CurrentPositionCollection>() {
+            @Override
+            public void onResponse(Call<CurrentPositionCollection> call, Response<CurrentPositionCollection> response) {
+                layoutCurrentMessage.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.GONE);
+                ivCar.setVisibility(View.GONE);
+                tvNoParking.setVisibility(View.GONE);
+                btnParking.setVisibility(View.GONE);
+                if (response.isSuccessful()) {
+                    CurrentPositionCollection dao = response.body();
+                    getUserInfo(userToken);
+                    if (dao.getResult() != null) {
+                        CurrentPosition car = (CurrentPosition) dao.getResult();
+
+                        if (car.isDriveOut() == false) {
+                            String message = car.getBuildingName() + " " + car.getFloorName() + " "
+                                    + car.getZoneName() + " " + car.getPositionName() + " " +
+                                    car.getTimeCreated();
+
+                            tvPosition.setText(car.getPositionName());
+                            tvZone.setText(car.getZoneName());
+                            tvFloor.setText(car.getFloorName());
+                            tvBuilding.setText(car.getBuildingName());
+                            tvStartTime.setText(car.getTimeCreated());
+
+                            Toast.makeText(getContext(),"message: "+message,Toast.LENGTH_LONG).show();
+                        }
+                    } else {
+                        tvNoParking.setText(dao.getMessage());
+                        layoutCurrentMessage.setVisibility(View.GONE);
+                        ivCar.setVisibility(View.VISIBLE);
+                        tvNoParking.setVisibility(View.VISIBLE);
+                        btnParking.setVisibility(View.VISIBLE);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CurrentPositionCollection> call, Throwable t) {
+                Toast.makeText(getContext(), "Error: " + String.valueOf(t.getMessage()), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    private void sendDataToServer() {
+        long millis = System.currentTimeMillis() / 1000L;
+
+        Call<CarPositionCollection> call = HttpManager.getInstance()
+                .getService()
+                .sendXYPosition(userToken,
+                        5.8,
+                        11,
+                        5018,
+                        fcmToken,
+                        millis);
+
+        call.enqueue(new Callback<CarPositionCollection>() {
+            @Override
+            public void onResponse(Call<CarPositionCollection> call, Response<CarPositionCollection> response) {
+                progressBar.setVisibility(View.GONE);
+                layoutCurrentMessage.setVisibility(View.VISIBLE);
+                layoutUserInfo.setVisibility(View.VISIBLE);
+                if (response.isSuccessful()) {
+                    CarPositionCollection dao = response.body();
+                    if (dao.getCarPositions() != null) {
+                        CarPositions car = (CarPositions) dao.getCarPositions();
+
+                        if (car.isDriveOut() == false) {
+                            String message = car.getBuildingName() + " " + car.getFloorName() + " "
+                                    + car.getZoneName() + " " + car.getPositionName() + " " +
+                                    car.getTimeCreated();
+
+                            tvPosition.setText(car.getPositionName());
+                            tvZone.setText(car.getZoneName());
+                            tvFloor.setText(car.getFloorName());
+                            tvBuilding.setText(car.getBuildingName());
+//                                tvStartTime.setText((int) car.getTimeCreated());
+
+                            Toast.makeText(getContext(), dao.getMessage(), Toast.LENGTH_LONG).show();
+                            Log.d("message from server", "-------- message from send data is: " + message);
+                        }
+                    } else {
+                        tvNoParking.setText(dao.getMessage());
+                        layoutCurrentMessage.setVisibility(View.GONE);
+                        ivCar.setVisibility(View.VISIBLE);
+                        tvNoParking.setVisibility(View.VISIBLE);
+                        btnParking.setVisibility(View.VISIBLE);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CarPositionCollection> call, Throwable t) {
+                Toast.makeText(getContext(), "Error: " + String.valueOf(t.getMessage()), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
     private void initFcmToken() {
         FirebaseInstanceId.getInstance().getInstanceId()
                 .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {

@@ -40,7 +40,13 @@
 
         <include android:id="@+id/layoutUserInfo" layout="@layout/user_info"/>
 
-        <include android:id="@+id/layoutCurrentMessage" layout="@layout/message_home"/>
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:layout_below="@+id/layoutUserInfo"
+            android:id="@+id/swipe_refresh_layout"
+            android:layout_width="match_parent"
+            android:layout_height="150dp">
+            <include android:id="@+id/layoutCurrentMessage" layout="@layout/message_home"/>
+        </android.support.v4.widget.SwipeRefreshLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
