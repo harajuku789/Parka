@@ -96,6 +96,7 @@ public class HomeFragment extends Fragment {
         userToken = sessionManager.getToken();
         Log.d("userToken", "------------ user token: " + userToken);
         getUserInfo(userToken);
+        refreshCurrentStatus();
 
         swipLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -138,7 +139,6 @@ public class HomeFragment extends Fragment {
 
     private void refreshCurrentStatus() {
         btnParking.setVisibility(View.VISIBLE);
-        Toast.makeText(getContext(),"fsd;jfksdf;lsdjf;sdjf",Toast.LENGTH_LONG);
         Log.d("TAG","Pass this line");
 
         getUserInfo(userToken);

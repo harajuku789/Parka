@@ -129,7 +129,10 @@ public class CarPositionHistoryActivity extends AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
-        onBackPressed();
+//        onBackPressed();
+        Intent anotherIntent = new Intent(CarPositionHistoryActivity.this, HomeActivity.class);
+        startActivity(anotherIntent);
+        finish();
         return true;
     }
 
