@@ -75,7 +75,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                     String s = remoteMessage.getData().get(k);
                     Log.d("Data Payload: ", "Message data payload: "+remoteMessage.getData().get(k));
 
-                    if (s.equals("You have drive out ?")){
+                    if (s.length() == 20){
+                        Log.d("Firebase","pass this line 79");
                         Intent resultIntent = new Intent(getApplicationContext(),WelcomeActivity.class);
                         resultIntent.putExtra("test","test");
                         resultIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -95,6 +96,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                         notificationManager.notify(idDataPayload, builder.build());
 
                     }else{
+                        Log.d("Firebase","pass this line 99");
                         Intent resultIntent = new Intent(getApplicationContext(),WelcomeActivity.class);
                         resultIntent.putExtra("test","pass");
                         resultIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);

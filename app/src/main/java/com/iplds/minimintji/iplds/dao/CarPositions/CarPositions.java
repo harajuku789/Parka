@@ -11,7 +11,7 @@ public class CarPositions {
     @SerializedName("position_name")        String positionName;
     @SerializedName("user_id")              int userId;
     @SerializedName("is_driveOut")          boolean isDriveOut;
-    @SerializedName("time_created")         long timeCreated;
+    @SerializedName("time_created")         String timeCreated;
 
     public CarPositions(){
 
@@ -81,11 +81,11 @@ public class CarPositions {
         isDriveOut = driveOut;
     }
 
-    public long getTimeCreated() {
+    public String getTimeCreated() {
         return timeCreated;
     }
 
-    public void setTimeCreated(long timeCreated) {
+    public void setTimeCreated(String timeCreated) {
         this.timeCreated = timeCreated;
     }
 }

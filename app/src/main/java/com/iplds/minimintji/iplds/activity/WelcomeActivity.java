@@ -29,15 +29,27 @@ public class WelcomeActivity extends Activity {
                 String token = prefs.getString("userToken", null);
 
                 Bundle extras = getIntent().getExtras();
+                Log.d("Bundle", "budle run 32: "+extras);
                 String test = null;
+                Log.d("Bundle", "String in run 34: "+test);
                 if (extras != null) {
+                    Log.d("Bundle", "budle in if 36: "+extras);
                     test = getIntent().getExtras().getString("test");
+                    Log.d("Bundle", "String in if 38: "+test);
                 }
 
                 if (token != null) {
                     if (test != null) {
                         if (test.equals("test")) {
+                            Log.d("Bundle", "Pass this line 44");
+                            Log.d("Bundle", "String in if 45: "+test);
                             Intent anotherIntent = new Intent(WelcomeActivity.this, CheckIsDriveOutActivity.class);
+                            startActivity(anotherIntent);
+                            finish();
+                        } else {
+                            Log.d("Bundle", "Pass this line 50");
+                            Log.d("Bundle", "String in if 51: "+test);
+                            Intent anotherIntent = new Intent(WelcomeActivity.this, HomeActivity.class);
                             startActivity(anotherIntent);
                             finish();
                         }

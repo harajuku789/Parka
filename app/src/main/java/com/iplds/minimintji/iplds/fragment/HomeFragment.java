@@ -22,13 +22,8 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 import com.iplds.minimintji.iplds.R;
 import com.iplds.minimintji.iplds.activity.CarPositionHistoryActivity;
-import com.iplds.minimintji.iplds.activity.HomeActivity;
 import com.iplds.minimintji.iplds.dao.CarPositions.CarPositionCollection;
-import com.iplds.minimintji.iplds.dao.CarPositions.CarPositionHistory;
-import com.iplds.minimintji.iplds.dao.CarPositions.CarPositionHistoryCollection;
 import com.iplds.minimintji.iplds.dao.CarPositions.CarPositions;
-import com.iplds.minimintji.iplds.dao.CarPositions.CurrentPosition;
-import com.iplds.minimintji.iplds.dao.CarPositions.CurrentPositionCollection;
 import com.iplds.minimintji.iplds.dao.User;
 import com.iplds.minimintji.iplds.manager.HttpManager;
 import com.iplds.minimintji.iplds.manager.SessionManager;
@@ -109,8 +104,8 @@ public class HomeFragment extends Fragment {
                 tvNoParking.setVisibility(View.GONE);
                 progressBar.setVisibility(View.VISIBLE);
                 btnParking.setVisibility(View.GONE);
+                layoutCurrentMessage.setVisibility(View.GONE);
                 refreshCurrentStatus();
-                Toast.makeText(getContext(), "Test", Toast.LENGTH_LONG).show();
                 swipLayout.setRefreshing(false);
             }
         });
@@ -147,23 +142,23 @@ public class HomeFragment extends Fragment {
         Log.d("TAG","Pass this line");
 
         getUserInfo(userToken);
-        Call<CurrentPositionCollection> call = HttpManager.getInstance()
+        Call<CarPositionCollection> call = HttpManager.getInstance()
                 .getService()
                 .getCurrentPosition(userToken);
 
-        call.enqueue(new Callback<CurrentPositionCollection>() {
+        call.enqueue(new Callback<CarPositionCollection>() {
             @Override
-            public void onResponse(Call<CurrentPositionCollection> call, Response<CurrentPositionCollection> response) {
+            public void onResponse(Call<CarPositionCollection> call, Response<CarPositionCollection> response) {
                 layoutCurrentMessage.setVisibility(View.VISIBLE);
                 progressBar.setVisibility(View.GONE);
                 ivCar.setVisibility(View.GONE);
                 tvNoParking.setVisibility(View.GONE);
                 btnParking.setVisibility(View.GONE);
                 if (response.isSuccessful()) {
-                    CurrentPositionCollection dao = response.body();
+                    CarPositionCollection dao = response.body();
                     getUserInfo(userToken);
-                    if (dao.getResult() != null) {
-                        CurrentPosition car = (CurrentPosition) dao.getResult();
+                    if (dao.getCarPositions() != null) {
+                        CarPositions car = (CarPositions) dao.getCarPositions();
 
                         if (car.isDriveOut() == false) {
                             String message = car.getBuildingName() + " " + car.getFloorName() + " "
@@ -189,7 +184,7 @@ public class HomeFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<CurrentPositionCollection> call, Throwable t) {
+            public void onFailure(Call<CarPositionCollection> call, Throwable t) {
                 Toast.makeText(getContext(), "Error: " + String.valueOf(t.getMessage()), Toast.LENGTH_LONG).show();
             }
         });
@@ -227,7 +222,7 @@ public class HomeFragment extends Fragment {
                             tvZone.setText(car.getZoneName());
                             tvFloor.setText(car.getFloorName());
                             tvBuilding.setText(car.getBuildingName());
-//                                tvStartTime.setText((int) car.getTimeCreated());
+                            tvStartTime.setText(car.getTimeCreated());
 
                             Toast.makeText(getContext(), dao.getMessage(), Toast.LENGTH_LONG).show();
                             Log.d("message from server", "-------- message from send data is: " + message);
@@ -279,10 +274,6 @@ public class HomeFragment extends Fragment {
                 User userInfo = response.body();
                 Log.d("UserInfo", "------------ UserInfo" + userInfo);
                 if (response.isSuccessful() && userInfo != null) {
-                    // ----- waiting for fragment -----
-                    //tvName.setText(userInfo.getName());
-                    //tvSurname.setText(userInfo.getSurname());
-
                     tvName.setText(userInfo.getName());
                     tvLastname.setText(userInfo.getSurname());
                 }

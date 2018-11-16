@@ -3,7 +3,6 @@ package com.iplds.minimintji.iplds.manager.http;
 import com.iplds.minimintji.iplds.dao.CarPositions.AvailableParkingCollection;
 import com.iplds.minimintji.iplds.dao.CarPositions.CarPositionCollection;
 import com.iplds.minimintji.iplds.dao.CarPositions.CarPositionHistoryCollection;
-import com.iplds.minimintji.iplds.dao.CarPositions.CurrentPositionCollection;
 import com.iplds.minimintji.iplds.dao.Token;
 import com.iplds.minimintji.iplds.dao.User;
 
@@ -52,7 +51,7 @@ public interface ApiService {
     Call<CarPositionHistoryCollection> getCarPositionHistory(@Path("token") String token);
 
     @GET("users/checkstatuscurrent/{token}/")
-    Call<CurrentPositionCollection> getCurrentPosition(@Path("token") String token);
+    Call<CarPositionCollection> getCurrentPosition(@Path("token") String token);
 }
 
 
