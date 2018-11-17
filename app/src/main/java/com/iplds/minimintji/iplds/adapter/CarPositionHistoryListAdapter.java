@@ -48,10 +48,15 @@ public class CarPositionHistoryListAdapter extends BaseAdapter{
         view.setTvZone(history.getZoneName());
         view.setTvFloor(history.getFloorName());
         view.setTvBuilding(history.getBuildingName());
-        view.setTvStartTime(history.getTimeCreated());
-        view.setTvEndTime(history.getTimeDriveOut());
-//        view.setTvStartTime((int) history.getTimeCreated());
-//        view.setTvEndTime((int)history.getTimeDriveOut());
+        String dateStart = history.getTimeCreated().substring(0,19).replace('T',' ');
+        Log.d("TESTLOG","dateStart dateStart: "+dateStart);
+        String dateDriveOut = history.getTimeDriveOut().substring(0,19).replace('T',' ');
+        Log.d("TESTLOG","dateDriveOut dateDriveOut: "+dateDriveOut);
+//        view.setTvStartTime(dateStart);
+//        view.setTvEndTime(dateDriveOut);
+        view.setTvStartTime(history.getTimeCreated().substring(0,19).replace('T',' '));
+        view.setTvEndTime(history.getTimeDriveOut().substring(0,19).replace('T',' '));
+
         Log.d("TESTLOG","testtttt getPositionName: "+history.getPositionName());
         Log.d("TESTLOG","testtttt getFloorName: "+history.getFloorName());
         Log.d("TESTLOG","testtttt getBuildingName: "+history.getBuildingName());

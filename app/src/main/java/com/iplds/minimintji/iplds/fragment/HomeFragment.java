@@ -28,6 +28,11 @@ import com.iplds.minimintji.iplds.dao.User;
 import com.iplds.minimintji.iplds.manager.HttpManager;
 import com.iplds.minimintji.iplds.manager.SessionManager;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -169,7 +174,10 @@ public class HomeFragment extends Fragment {
                             tvZone.setText(car.getZoneName());
                             tvFloor.setText(car.getFloorName());
                             tvBuilding.setText(car.getBuildingName());
-                            tvStartTime.setText(car.getTimeCreated());
+
+                            String dateString = car.getTimeCreated().substring(0,19).replace('T',' ');
+                            DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                            tvStartTime.setText(dateString);
 
                             Toast.makeText(getContext(),"message: "+message,Toast.LENGTH_LONG).show();
                         }
@@ -222,7 +230,8 @@ public class HomeFragment extends Fragment {
                             tvZone.setText(car.getZoneName());
                             tvFloor.setText(car.getFloorName());
                             tvBuilding.setText(car.getBuildingName());
-                            tvStartTime.setText(car.getTimeCreated());
+                            String dateString = car.getTimeCreated().substring(0,19).replace('T',' ');
+                            tvStartTime.setText(dateString);
 
                             Toast.makeText(getContext(), dao.getMessage(), Toast.LENGTH_LONG).show();
                             Log.d("message from server", "-------- message from send data is: " + message);

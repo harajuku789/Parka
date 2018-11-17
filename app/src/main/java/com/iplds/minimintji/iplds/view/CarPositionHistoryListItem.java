@@ -121,27 +121,13 @@ public class CarPositionHistoryListItem extends BaseCustomViewGroup{
 
     public void setTvStartTime(String startTime){
         //        TODO: solve this ploblem dateformat
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:MM:SS");
-        try {
-            Date date = formatter.parse(startTime);
-            Log.d("Timeeeeeeeee","datetime: "+date);
-            tvStartTime.setText(startTime);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        tvStartTime.setText(startTime);
 
     }
 
     public void setTvEndTime(String endTime){
 //        TODO: solve this ploblem dateformat
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:MM:SS");
-        try {
-            Date date = formatter.parse(endTime);
-            Log.d("Timeeeeeeeee","datetime: "+date);
-            tvStartTime.setText(endTime);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        tvEndTime.setText(endTime);
     }
 
 }
